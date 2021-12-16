@@ -1,24 +1,17 @@
-import os
-from pymongo import MongoClient
-from fastapi import FastAPI, Body, HTTPException, status
+from fastapi import FastAPI, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
-from bson import ObjectId
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List
+from starlette.responses import JSONResponse
+from models import InfoModel, UpdateInfoModel
 
-load_dotenv()
-MONGODB_URI = os.environ["MONGODB_URI"]
-
-# instantiation of database object
-client = AsyncIOMotorClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
-db = client.person
+from database import (
+    getPerson,
+    createPerson,
+    updatePerson
+)
 
 app = FastAPI()
 
-# setup CORS middleware
+# ========= CORS Middleware =========
 origins = [
     "http://pochetes.herokuapp.com/personal",
     "http://pochetes.herokuapp.com/experiences",
@@ -41,65 +34,39 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# helps convert id data type into string for FastAPI
-class PyObjectId(ObjectId):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
+# ========= ENDPOINTS =========
+@app.get(
+    '/personal/info', 
+    response_description="Retrieves the main details about me: full name, email and description.",
+    response_model=InfoModel
+)
+def get_person():
+    response = getPerson()
+    if response:
+        return JSONResponse(response, 200)
+    else:
+        raise HTTPException(400, "Person does not exist!")    
 
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid objectid")
-        return ObjectId(v)
+@app.post(
+    '/personal/info', 
+    response_description="Create a new person (once).", 
+    response_model=InfoModel
+)
+def create_person(info: InfoModel = Body(...)):
+    response = createPerson(info.dict())
+    if response:
+        return JSONResponse(response, 200)
+    else:
+        raise HTTPException(400, "Bad Request")
 
-    @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type="string")
-
-# model for the GET /personal/info endpoint
-class PersonalInfoModel(BaseModel):
-    firstName: str
-    lastName: str
-    email: EmailStr
-    description: str
-
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = { ObjectId: str }
-        # schema (response example) for the GET /personal/info endpoint
-        schema_extra = {
-            "example": {
-                "firstName": "John",
-                "lastName": "Doe",
-                "email": "johndoe@gmail.com",
-                "description": "What a nice guy!"
-            }
-        }
-
-# model for the PUT /personal/info endpoint
-class UpdatePersonalInfoModel(BaseModel):
-    firstName: Optional[str]
-    lastName: Optional[str]
-    email: Optional[EmailStr]
-    description: Optional[str]
-
-    class Config:
-        arbitrary_types_allowed = True
-        json_encoders = { ObjectId: str }
-        # schema (response example) for the PUT /personal/info endpoint
-        schema_extra = {
-            "example": {
-                "firstName": "John",
-                "lastName": "Doe",
-                "email": "johndoe@gmail.com",
-                "description": "What a nice guy!"
-            }
-        }
-
-@app.get('/')
-async def hello():
-    return {
-        "message": "Hello, universe."
-    }
+@app.put(
+    '/personal/info',
+    response_description="Updates the main details about me (should only be the description).",
+    response_model=InfoModel
+)
+def update_person(firstName: str, info: UpdateInfoModel = Body(...)):
+    response = updatePerson(firstName, info.dict())
+    if response:
+        return JSONResponse(response, 200)
+    else:
+        raise HTTPException(400, "Person does not exist!")
