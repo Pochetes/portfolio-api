@@ -1,6 +1,11 @@
+import os, uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import user
+from pymongo import MongoClient
+from dotenv import load_dotenv
+
+load_dotenv()
+MONGODB_URI = os.environ["MONGODB_URI"]
 
 app = FastAPI()
 
@@ -27,4 +32,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.userRouter)
+@app.on_event("startup")
+def startupDBClient():
+    app.client = MongoClient(MONGODB_URI)
+    app.db = app.client['portfolio']
+
+@app.on_event("shutdown")
+def shutdownDBClient():
+    app.client.close()
+
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        reload=True,
+    )
+
