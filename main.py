@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from dotenv import load_dotenv
 
+from endpoints.user.routers import router as userRouter
+
 load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
 
@@ -40,6 +42,8 @@ def startupDBClient():
 @app.on_event("shutdown")
 def shutdownDBClient():
     app.client.close()
+
+app.include_router(userRouter)
 
 if __name__ == "__main__":
     uvicorn.run(
