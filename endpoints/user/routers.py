@@ -1,17 +1,22 @@
 import json
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
-from ..models import User, UpdateUser
-from database import db
+from typing import List
+from .models import User, UpdateUser, Contact, UpdateContact
 from bson import json_util
 
-userRouter = APIRouter(prefix='/user',)
-userCollection = db['user']
+router = APIRouter(prefix='/user')
 
-@userRouter.get('/', response_model=User)
-def getUser():
-    foundUser = list(userCollection.find({}))
+# references mongoDB instantiation across entire FastAPI app
+# Request.app.db['user']
+
+# ================== START /user endpoint ==================
+
+# GET all users (should only be me)
+@router.get('/', response_model=User)
+def getUser(request: Request):
+    foundUser = list(request.app.db['user'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(foundUser, default=json_util.default))
@@ -20,10 +25,11 @@ def getUser():
     else:
         HTTPException(400, "Person does not exist!")
 
-@userRouter.post('/', response_model=User)
-def createPerson(user: User): # CAN ONLY BE DONE ONCE
-    newUser = user
-    userCollection.insert_one(newUser)
+# CREATE a new user (should only be done once)
+@router.post('/', response_model=User)
+def createPerson(user: User, request: Request): # CAN ONLY BE DONE ONCE
+    newUser = user.dict()
+    request.app.db['user'].insert_one(newUser)
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newUser, default=json_util.default))
@@ -32,12 +38,12 @@ def createPerson(user: User): # CAN ONLY BE DONE ONCE
     else:
         HTTPException(400, "Bad Request")
     
-
-@userRouter.put('/', response_model=UpdateUser)
-def updatePerson(firstName: str, user: User):
-    updatedUser = user
-    userCollection.update_one({"firstName": firstName}, { "$set": updatedUser})
-    userCollection.find_one({"firstName": firstName})
+# UPDATE the current user (should only be description)
+@router.put('/', response_model=UpdateUser)
+def updatePerson(firstName: str, user: User, request: Request):
+    updatedUser = user.dict()
+    request.app.db['user'].update_one({"firstName": firstName}, { "$set": updatedUser})
+    request.app.db['user'].find_one({"firstName": firstName})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedUser, default=json_util.default))
@@ -45,3 +51,4 @@ def updatePerson(firstName: str, user: User):
         return JSONResponse(response, 200)
     else:
         HTTPException(400, "Person does not exist!")
+# ================== END /user endpoint ==================

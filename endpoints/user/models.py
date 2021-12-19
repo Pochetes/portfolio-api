@@ -20,7 +20,7 @@ class PyObjectId(ObjectId):
 
 # ========= /user/contacts Endpoint =========
 class Contact(BaseModel):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     title: str = Field(...)
     link: str = Field(...)
 
@@ -31,12 +31,12 @@ class UpdateContact(BaseModel):
 
 # ========= /user Endpoint =========
 class User(BaseModel):
-    id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     firstName: str = Field(...)
     lastName: str = Field(...)
     email: EmailStr = Field(...)
     description: str = Field(...)
-    contacts: List[Contact] = []
+    contacts: Optional[List[Contact]] = []
 
 class UpdateUser(BaseModel):
     firstName: Optional[str]
