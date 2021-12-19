@@ -21,10 +21,10 @@ class PyObjectId(ObjectId):
 # ========= /skills Endpoint =========
 class Skill(BaseModel):
     # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    skill: str = Field(...)
+    technology: str = Field(...)
     image: str = Field(...)
 
 class UpdateSkill(BaseModel):
-    skill: Optional[str]
+    technology: Optional[str]
     image: Optional[str]
 # ========= END /skills Endpoint =========
