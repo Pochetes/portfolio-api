@@ -43,7 +43,7 @@ def startupDBClient():
 def shutdownDBClient():
     app.client.close()
 
-app.include_router(userRouter)
+app.include_router(userRouter, tags=["user"])
 
 if __name__ == "__main__":
     uvicorn.run(
