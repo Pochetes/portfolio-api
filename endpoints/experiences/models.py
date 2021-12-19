@@ -18,13 +18,19 @@ class PyObjectId(ObjectId):
     def __modify_schema__(cls, field_schema):
         field_schema.update(type="string")
 
-# ========= /user/contacts Endpoint =========
-class Contact(BaseModel):
+# ========= /experience Endpoint =========
+class Experience(BaseModel):
     # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    title: str = Field(...)
-    link: str = Field(...)
+    company: str = Field(...)
+    position: str = Field(...)
+    dateStarted: str = Field(...)
+    dateEnded: str = Field(...)
+    image: str = Field(...)
 
-class UpdateContact(BaseModel):
-    title: Optional[str]
-    link: Optional[str]
-# ========= END /user/contacts Endpoint =========
+class UpdateExperience(BaseModel):
+    company: Optional[str]
+    position: Optional[str]
+    dateStarted: Optional[str]
+    dateEnded: Optional[str]
+    image: Optional[str]
+# ========= END /experience Endpoint =========

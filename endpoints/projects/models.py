@@ -18,13 +18,17 @@ class PyObjectId(ObjectId):
     def __modify_schema__(cls, field_schema):
         field_schema.update(type="string")
 
-# ========= /user/contacts Endpoint =========
-class Contact(BaseModel):
+# ========= /projects Endpoint =========
+class Project(BaseModel):
     # id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
     title: str = Field(...)
+    description: str = Field(...)
+    image: str = Field(...)
     link: str = Field(...)
 
-class UpdateContact(BaseModel):
+class UpdateProject(BaseModel):
     title: Optional[str]
+    description: Optional[str]
+    image: Optional[str]
     link: Optional[str]
-# ========= END /user/contacts Endpoint =========
+# ========= END /projects Endpoint =========
