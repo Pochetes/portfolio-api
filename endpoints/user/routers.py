@@ -2,8 +2,7 @@ import json
 from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
-from typing import List
-from .models import User, UpdateUser, Contact, UpdateContact
+from .models import User, UpdateUser
 from bson import json_util
 
 router = APIRouter(prefix='/user')
@@ -23,7 +22,7 @@ def getUser(request: Request):
     if response:
         return JSONResponse(response, 200)
     else:
-        HTTPException(400, "Person does not exist!")
+        raise HTTPException(400, "Person does not exist!")
 
 # CREATE a new user (should only be done once)
 @router.post('/', response_model=User)
@@ -36,19 +35,18 @@ def createPerson(user: User, request: Request): # CAN ONLY BE DONE ONCE
     if response:
         return JSONResponse(response, 200)
     else:
-        HTTPException(400, "Bad Request")
+        raise HTTPException(400, "Bad Request")
     
 # UPDATE the current user (should only be description)
 @router.put('/', response_model=UpdateUser)
 def updatePerson(firstName: str, user: User, request: Request):
     updatedUser = user.dict()
     request.app.db['user'].update_one({"firstName": firstName}, { "$set": updatedUser})
-    request.app.db['user'].find_one({"firstName": firstName})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedUser, default=json_util.default))
     if response:
         return JSONResponse(response, 200)
     else:
-        HTTPException(400, "Person does not exist!")
+        raise HTTPException(400, "Person does not exist!")
 # ================== END /user endpoint ==================

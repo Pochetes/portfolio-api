@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 
 from endpoints.user.routers import router as userRouter
+from endpoints.contacts.routers import router as contactsRouter
 
 load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
@@ -44,6 +45,7 @@ def shutdownDBClient():
     app.client.close()
 
 app.include_router(userRouter, tags=["user"])
+app.include_router(contactsRouter, tags=["contacts"])
 
 if __name__ == "__main__":
     uvicorn.run(
