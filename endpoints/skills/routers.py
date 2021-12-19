@@ -12,7 +12,7 @@ router = APIRouter(prefix='/skills')
 # ================== START /skills endpoint ==================
 
 # GET all skills (i.e Python, C, JavaScript)
-@router.get('/', response_model=List[Skill])
+@router.get('', response_model=List[Skill])
 def getSkills(request: Request):
     skills = list(request.app.db['skills'].find({}))
     # converts list object to str (JSON format)
@@ -24,7 +24,7 @@ def getSkills(request: Request):
        raise HTTPException(400, "No skills found!")
 
 # CREATE a new skill
-@router.post('/', response_model=Skill)
+@router.post('', response_model=Skill)
 def createSkill(skill: Skill, request: Request):
     newSkill = skill.dict()
     request.app.db['skills'].insert_one(newSkill)

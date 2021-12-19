@@ -11,7 +11,7 @@ router = APIRouter(prefix='/contacts')
 # ================== START /contacts endpoint ==================
 
 # GET all contacts (i.e. LinkedIn, Twitter, Github)
-@router.get('/', response_model=List[Contact])
+@router.get('', response_model=List[Contact])
 def getContacts(request: Request):
     contacts = list(request.app.db['contacts'].find({}))
     # converts list object to str (JSON format)
@@ -23,7 +23,7 @@ def getContacts(request: Request):
        raise HTTPException(400, "No contacts found!")
 
 # CREATE a new contact
-@router.post('/', response_model=Contact)
+@router.post('', response_model=Contact)
 def createContact(contact: Contact, request: Request):
     newContact = contact.dict()
     request.app.db['contacts'].insert_one(newContact)
