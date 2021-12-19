@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 from endpoints.user.routers import router as userRouter
 from endpoints.contacts.routers import router as contactsRouter
+from endpoints.skills.routers import router as skillsRouter
 
 load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
@@ -46,6 +47,7 @@ def shutdownDBClient():
 
 app.include_router(userRouter, tags=["user"])
 app.include_router(contactsRouter, tags=["contacts"])
+app.include_router(skillsRouter, tags=['skills'])
 
 if __name__ == "__main__":
     uvicorn.run(
