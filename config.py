@@ -12,6 +12,19 @@ class Settings(BaseSettings):
         "name": "MIT",
         "url": "https://choosealicense.com/licenses/mit"
     }
+    CORS_ORIGINS: list = [
+    "http://pochetes.herokuapp.com/personal",
+    "http://pochetes.herokuapp.com/experiences",
+    "http://pochetes.herokuapp.com/projects",
+    "https://pochetes.herokuapp.com/personal",
+    "https://pochetes.herokuapp.com/experiences",
+    "https://pochetes.herokuapp.com/projects",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://localhost:8000/personal",
+    "http://localhost:8000/experiences",
+    "http://localhost:8000/projects",
+]
     DB_NAME: str = "portfolio"
     DB_URL: str = "MONGODB_URI"
     DESC: str = """
