@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from functools import lru_cache
 from config import settings
 
 from endpoints.user.routers import router as userRouter
@@ -14,6 +15,12 @@ from endpoints.projects.routers import router as projectsRouter
 
 load_dotenv()
 MONGODB_URI = os.environ[settings.DB_URL]
+
+@lru_cache
+def getSettings():
+    return settings
+
+getSettings()
 
 app = FastAPI(
     title=settings.APP_NAME,
