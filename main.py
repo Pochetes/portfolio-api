@@ -8,6 +8,7 @@ from endpoints.user.routers import router as userRouter
 from endpoints.contacts.routers import router as contactsRouter
 from endpoints.skills.routers import router as skillsRouter
 from endpoints.experiences.routers import router as experiencesRouter
+from endpoints.interests.routers import router as interestsRouter
 
 load_dotenv()
 MONGODB_URI = os.environ["MONGODB_URI"]
@@ -50,6 +51,8 @@ app.include_router(userRouter, tags=["user"])
 app.include_router(contactsRouter, tags=["contacts"])
 app.include_router(skillsRouter, tags=['skills'])
 app.include_router(experiencesRouter, tags=['experiences'])
+app.include_router(interestsRouter, tags=['interests'])
+
 
 if __name__ == "__main__":
     uvicorn.run(

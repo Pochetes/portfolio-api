@@ -39,8 +39,6 @@ def createExperience(request: Request, experience: Experience = Body(...)):
 @router.get('/{id}', response_model=Experience)
 def getExperience(id: str, request: Request):
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
-    print(id)
-    print(experience)
 
     response = json.loads(json.dumps(experience, default=json_util.default))
     if response:
@@ -59,7 +57,7 @@ def updateExperience(id: str, request: Request, experience: UpdateExperience = B
     if response:
         return JSONResponse(response, 200)
     else:
-        raise HTTPException(400, f"Experience with {id} does not exist!")
+        raise HTTPException(400, f"Experience with id {id} does not exist!")
 
 # DELETE an experience by id
 @router.delete('/{id}', response_model=Experience)
