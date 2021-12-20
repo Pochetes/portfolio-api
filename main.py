@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from config import settings
 
 from endpoints.user.routers import router as userRouter
 from endpoints.contacts.routers import router as contactsRouter
@@ -12,9 +13,15 @@ from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
 
 load_dotenv()
-MONGODB_URI = os.environ["MONGODB_URI"]
+MONGODB_URI = os.environ[settings.DB_URL]
 
-app = FastAPI()
+app = FastAPI(
+    title=settings.APP_NAME,
+    description=settings.DESC,
+    version=settings.VERSION,
+    contact=settings.CONTACT,
+    license_info=settings.LICENSE
+)
 
 # ========= CORS Middleware =========
 origins = [
@@ -42,7 +49,7 @@ app.add_middleware(
 @app.on_event("startup")
 def startupDBClient():
     app.client = MongoClient(MONGODB_URI)
-    app.db = app.client['portfolio']
+    app.db = app.client[settings.DB_NAME]
 
 @app.on_event("shutdown")
 def shutdownDBClient():
@@ -58,5 +65,5 @@ app.include_router(projectsRouter, tags=['projects'])
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        reload=True,
+        reload=settings.DEBUG_MODE,
     )
