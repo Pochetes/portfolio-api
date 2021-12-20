@@ -1,5 +1,6 @@
 from pydantic import BaseSettings
-  
+
+# CHANGE  
 class DatabaseSettings(BaseSettings):
     DB_NAME: str = "portfolio"
     DB_URI: str = "MONGODB_URI"
@@ -7,6 +8,7 @@ class DatabaseSettings(BaseSettings):
     class Config:
         orm_mode = True
 
+# CHANGE
 class MiddlewareSettings(BaseSettings):
     CORS_CRED: bool = True
     CORS_METHODS: list = ["*"]
@@ -28,6 +30,7 @@ class MiddlewareSettings(BaseSettings):
     class Config:
         orm_mode = True    
 
+# CHANGE
 class MetadataSettings(BaseSettings):
     APP_NAME: str = "Roberto's Portfolio API"
     DEBUG_MODE: bool = True
@@ -76,7 +79,8 @@ This will return my software related projects that I have worked on.
 
     class Config:
         orm_mode = True
-        
+
+# container class for all settings        
 class Settings(BaseSettings):
     db: DatabaseSettings
     md: MiddlewareSettings

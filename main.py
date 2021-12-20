@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from functools import lru_cache
 from config import settings
 
+# endpoint methods
 from endpoints.user.routers import router as userRouter
 from endpoints.contacts.routers import router as contactsRouter
 from endpoints.skills.routers import router as skillsRouter
@@ -13,7 +14,7 @@ from endpoints.experiences.routers import router as experiencesRouter
 from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
 
-@lru_cache
+@lru_cache # caches the execution of settings for optimization
 def getSettings():
     return settings
 
@@ -22,10 +23,11 @@ db = getSettings().db
 md = getSettings().md
 mt = getSettings().mt
 
+# loading env variable that holds MongoDB connection
 load_dotenv()
 MONGODB_URI = os.environ[db.DB_URI]
 
-
+# instantiation of FastAPI app w/ configuration
 app = FastAPI(
     title=mt.APP_NAME,
     description=mt.DESC,
@@ -34,7 +36,7 @@ app = FastAPI(
     license_info=mt.LICENSE
 )
 
-# ========= CORS Middleware =========
+# cors middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=md.CORS_ORIGINS,
