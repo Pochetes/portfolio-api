@@ -13,7 +13,7 @@ router = APIRouter(prefix='/skills')
 
 # GET all skills (i.e Python, C, JavaScript)
 @router.get('', response_model=List[Skill])
-def getSkills(request: Request):
+def get_all_skills(request: Request):
     skills = list(request.app.db['skills'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -25,7 +25,7 @@ def getSkills(request: Request):
 
 # CREATE a new skill
 @router.post('', response_model=Skill)
-def createSkill(skill: Skill, request: Request):
+def create_a_new_skill(skill: Skill, request: Request):
     newSkill = skill.dict()
     request.app.db['skills'].insert_one(newSkill)
     # converts list object to str (JSON format)
@@ -38,7 +38,7 @@ def createSkill(skill: Skill, request: Request):
 
 # GET a skill by skill type
 @router.get('/{technology}', response_model=Skill)
-def getSkill(technology: str, request: Request):
+def get_a_skill_by_technology(technology: str, request: Request):
     oneSkill = request.app.db['skills'].find_one({"technology": technology})
 
     response = json.loads(json.dumps(oneSkill, default=json_util.default))
@@ -47,9 +47,9 @@ def getSkill(technology: str, request: Request):
     else:
         raise HTTPException(404, f"{technology} skill not found")
 
-# UPDATE a contact by title
+# UPDATE a skill by skill type
 @router.put('/{technology}', response_model=UpdateSkill)
-def updateSkill(technology: str, skill: Skill, request: Request):
+def update_a_skill_by_technology(technology: str, skill: Skill, request: Request):
     updatedSkill = skill.dict()
     request.app.db['skills'].update_one({"technology": technology}, { "$set": updatedSkill})
     # converts list object to str (JSON format)
@@ -62,7 +62,7 @@ def updateSkill(technology: str, skill: Skill, request: Request):
 
 # DELETE a skill by skill type
 @router.delete('/{technology}', response_model=Skill)
-def deleteSkill(technology: str, request: Request):
+def delete_a_skill_by_technology(technology: str, request: Request):
     deletedSkill = request.app.db["skills"].delete_one({"technology": technology})
 
     if deletedSkill.deleted_count == 1:

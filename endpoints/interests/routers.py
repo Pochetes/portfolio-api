@@ -12,7 +12,7 @@ router = APIRouter(prefix='/interests')
 
 # GET all interests
 @router.get('', response_model=List[Interest])
-def getInterests(request: Request):
+def get_all_interests(request: Request):
     interests = list(request.app.db['interests'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -24,7 +24,7 @@ def getInterests(request: Request):
 
 # CREATE a new interest
 @router.post('', response_model=Interest)
-def createInterest(request: Request, interest: Interest = Body(...)):
+def create_a_new_interest(request: Request, interest: Interest = Body(...)):
     newinterest = interest.dict()
     request.app.db['interests'].insert_one(newinterest)
     # converts list object to str (JSON format)
@@ -37,7 +37,7 @@ def createInterest(request: Request, interest: Interest = Body(...)):
 
 # GET an interest by id
 @router.get('/{id}', response_model=Interest)
-def getInterest(id: str, request: Request):
+def get_an_interest_by_id(id: str, request: Request):
     interest = request.app.db['interests'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(interest, default=json_util.default))
     
@@ -48,7 +48,7 @@ def getInterest(id: str, request: Request):
 
 # UPDATE an interest by id
 @router.put('/{id}', response_model=UpdateInterest)
-def updateInterest(id: str, request: Request, interest: UpdateInterest = Body(...)):
+def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest = Body(...)):
     updatedInterest = interest.dict()
     request.app.db['interests'].update_one({"_id": ObjectId(id)}, { "$set": updatedInterest})
     # converts list object to str (JSON format)
@@ -61,7 +61,7 @@ def updateInterest(id: str, request: Request, interest: UpdateInterest = Body(..
 
 # DELETE an interest by id
 @router.delete('/{id}', response_model=Interest)
-def deleteInterest(id: str, request: Request):
+def delete_an_interest_by_id(id: str, request: Request):
     deletedInterest = request.app.db["interests"].delete_one({"_id": ObjectId(id)})
 
     if deletedInterest.deleted_count == 1:

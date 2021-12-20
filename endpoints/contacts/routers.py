@@ -12,7 +12,7 @@ router = APIRouter(prefix='/contacts')
 
 # GET all contacts (i.e. LinkedIn, Twitter, Github)
 @router.get('', response_model=List[Contact])
-def getContacts(request: Request):
+def get_all_contacts(request: Request):
     contacts = list(request.app.db['contacts'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -24,7 +24,7 @@ def getContacts(request: Request):
 
 # CREATE a new contact
 @router.post('', response_model=Contact)
-def createContact(contact: Contact, request: Request):
+def create_a_new_contact(contact: Contact, request: Request):
     newContact = contact.dict()
     request.app.db['contacts'].insert_one(newContact)
     # converts list object to str (JSON format)
@@ -37,7 +37,7 @@ def createContact(contact: Contact, request: Request):
 
 # GET a contact by title
 @router.get('/{title}', response_model=Contact)
-def getContact(title: str, request: Request):
+def get_a_contact_by_title(title: str, request: Request):
     contact = request.app.db['contacts'].find_one({"title": title})
 
     response = json.loads(json.dumps(contact, default=json_util.default))
@@ -48,7 +48,7 @@ def getContact(title: str, request: Request):
 
 # UPDATE a contact by title
 @router.put('/{title}', response_model=UpdateContact)
-def updateContact(title: str, contact: Contact, request: Request):
+def update_a_contact_by_title(title: str, contact: Contact, request: Request):
     updatedContact = contact.dict()
     request.app.db['contacts'].update_one({"title": title}, { "$set": updatedContact})
     # converts list object to str (JSON format)
@@ -61,7 +61,7 @@ def updateContact(title: str, contact: Contact, request: Request):
 
 # DELETE a contact by title
 @router.delete('/{title}', response_model=Contact)
-def deleteContact(title: str, request: Request):
+def delete_a_contact_by_title(title: str, request: Request):
     deletedContact = request.app.db["contacts"].delete_one({"title": title})
 
     if deletedContact.deleted_count == 1:

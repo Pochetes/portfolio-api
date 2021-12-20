@@ -12,7 +12,7 @@ router = APIRouter(prefix='/experiences')
 
 # GET all experiences
 @router.get('', response_model=List[Experience])
-def getExperiences(request: Request):
+def get_all_experiences(request: Request):
     experiences = list(request.app.db['experiences'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -24,7 +24,7 @@ def getExperiences(request: Request):
 
 # CREATE a new experience
 @router.post('', response_model=Experience)
-def createExperience(request: Request, experience: Experience = Body(...)):
+def create_a_new_experience(request: Request, experience: Experience = Body(...)):
     newExperience = experience.dict()
     request.app.db['experiences'].insert_one(newExperience)
     # converts list object to str (JSON format)
@@ -37,7 +37,7 @@ def createExperience(request: Request, experience: Experience = Body(...)):
 
 # GET an experience by id
 @router.get('/{id}', response_model=Experience)
-def getExperience(id: str, request: Request):
+def get_an_experience_by_id(id: str, request: Request):
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
 
     response = json.loads(json.dumps(experience, default=json_util.default))
@@ -48,7 +48,7 @@ def getExperience(id: str, request: Request):
 
 # UPDATE an experience by id
 @router.put('/{id}', response_model=UpdateExperience)
-def updateExperience(id: str, request: Request, experience: UpdateExperience = Body(...)):
+def update_an_experience_by_id(id: str, request: Request, experience: UpdateExperience = Body(...)):
     updatedExperience = experience.dict()
     request.app.db['experiences'].update_one({"_id": ObjectId(id)}, { "$set": updatedExperience})
     # converts list object to str (JSON format)
@@ -61,7 +61,7 @@ def updateExperience(id: str, request: Request, experience: UpdateExperience = B
 
 # DELETE an experience by id
 @router.delete('/{id}', response_model=Experience)
-def deleteExperience(id: str, request: Request):
+def delete_an_experience_by_id(id: str, request: Request):
     deletedExperience = request.app.db["experiences"].delete_one({"_id": ObjectId(id)})
 
     if deletedExperience.deleted_count == 1:

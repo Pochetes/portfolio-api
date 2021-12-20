@@ -12,7 +12,7 @@ router = APIRouter(prefix='/projects')
 
 # GET all projects
 @router.get('', response_model=List[Project])
-def getProjects(request: Request):
+def get_all_projects(request: Request):
     projects = list(request.app.db['projects'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -24,7 +24,7 @@ def getProjects(request: Request):
 
 # CREATE a new project
 @router.post('', response_model=Project)
-def createProject(request: Request, project: Project = Body(...)):
+def create_a_new_project(request: Request, project: Project = Body(...)):
     newProject = project.dict()
     request.app.db['projects'].insert_one(newProject)
     # converts list object to str (JSON format)
@@ -35,9 +35,9 @@ def createProject(request: Request, project: Project = Body(...)):
     else:
         raise HTTPException(400, "Bad request")
 
-# GET an project by id
+# GET a project by id
 @router.get('/{id}', response_model=Project)
-def getProject(id: str, request: Request):
+def get_a_project_by_id(id: str, request: Request):
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
     
@@ -46,9 +46,9 @@ def getProject(id: str, request: Request):
     else:
         raise HTTPException(404, f"project with id {id} not found")
 
-# UPDATE an project by id
+# UPDATE a project by id
 @router.put('/{id}', response_model=UpdateProject)
-def updateProject(id: str, request: Request, project: UpdateProject = Body(...)):
+def update_a_project_by_id(id: str, request: Request, project: UpdateProject = Body(...)):
     updatedProject = project.dict()
     request.app.db['projects'].update_one({"_id": ObjectId(id)}, { "$set": updatedProject})
     # converts list object to str (JSON format)
@@ -59,9 +59,9 @@ def updateProject(id: str, request: Request, project: UpdateProject = Body(...))
     else:
         raise HTTPException(400, f"project with id {id} does not exist!")
 
-# DELETE an project by id
+# DELETE a project by id
 @router.delete('/{id}', response_model=Project)
-def deleteProject(id: str, request: Request):
+def delete_a_project_by_id(id: str, request: Request):
     deletedProject = request.app.db["projects"].delete_one({"_id": ObjectId(id)})
 
     if deletedProject.deleted_count == 1:

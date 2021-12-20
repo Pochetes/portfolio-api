@@ -14,7 +14,7 @@ router = APIRouter(prefix='/user')
 
 # GET all users (should only be me)
 @router.get('', response_model=User)
-def getUser(request: Request):
+def get_all_users(request: Request):
     foundUser = list(request.app.db['user'].find({}))
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
@@ -26,7 +26,7 @@ def getUser(request: Request):
 
 # CREATE a new user (should only be done once)
 @router.post('', response_model=User)
-def createPerson(user: User, request: Request): # CAN ONLY BE DONE ONCE
+def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
     newUser = user.dict()
     request.app.db['user'].insert_one(newUser)
     # converts list object to str (JSON format)
@@ -39,7 +39,7 @@ def createPerson(user: User, request: Request): # CAN ONLY BE DONE ONCE
     
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
-def updatePerson(firstName: str, user: User, request: Request):
+def update_the_current_user(firstName: str, user: User, request: Request):
     updatedUser = user.dict()
     request.app.db['user'].update_one({"firstName": firstName}, { "$set": updatedUser})
     # converts list object to str (JSON format)
