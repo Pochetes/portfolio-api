@@ -1,32 +1,45 @@
 from pydantic import BaseSettings
+  
+class DatabaseSettings(BaseSettings):
+    DB_NAME: str = "portfolio"
+    DB_URI: str = "MONGODB_URI"
 
-class Settings(BaseSettings):
+    class Config:
+        orm_mode = True
+
+class MiddlewareSettings(BaseSettings):
+    CORS_CRED: bool = True
+    CORS_METHODS: list = ["*"]
+    CORS_HEADERS: list = ["*"]
+    CORS_ORIGINS: list = [
+        "http://pochetes.herokuapp.com/personal",
+        "http://pochetes.herokuapp.com/experiences",
+        "http://pochetes.herokuapp.com/projects",
+        "https://pochetes.herokuapp.com/personal",
+        "https://pochetes.herokuapp.com/experiences",
+        "https://pochetes.herokuapp.com/projects",
+        "http://localhost",
+        "http://localhost:8000",
+        "http://localhost:8000/personal",
+        "http://localhost:8000/experiences",
+        "http://localhost:8000/projects",
+    ]
+
+    class Config:
+        orm_mode = True    
+
+class MetadataSettings(BaseSettings):
     APP_NAME: str = "Roberto's Portfolio API"
     DEBUG_MODE: bool = True
     VERSION: str = "1.0.0"
     CONTACT: dict = {
-        "name": "Roberto Martinez",
-        "email": "robertomiguel2001@gmail.com"
-    }
+            "name": "Roberto Martinez",
+            "email": "robertomiguel2001@gmail.com"
+        }
     LICENSE: dict = {
         "name": "MIT",
         "url": "https://choosealicense.com/licenses/mit"
     }
-    CORS_ORIGINS: list = [
-    "http://pochetes.herokuapp.com/personal",
-    "http://pochetes.herokuapp.com/experiences",
-    "http://pochetes.herokuapp.com/projects",
-    "https://pochetes.herokuapp.com/personal",
-    "https://pochetes.herokuapp.com/experiences",
-    "https://pochetes.herokuapp.com/projects",
-    "http://localhost",
-    "http://localhost:8000",
-    "http://localhost:8000/personal",
-    "http://localhost:8000/experiences",
-    "http://localhost:8000/projects",
-]
-    DB_NAME: str = "portfolio"
-    DB_URL: str = "MONGODB_URI"
     DESC: str = """
 This is an API that retrieves information about Roberto Martinez's personal and work life. 🚀
 
@@ -61,4 +74,17 @@ This will retrieve my interests **in** and **outside** the technology world.
 This will return my software related projects that I have worked on.
 """
 
-settings = Settings()
+    class Config:
+        orm_mode = True
+        
+class Settings(BaseSettings):
+    db: DatabaseSettings
+    md: MiddlewareSettings
+    mt: MetadataSettings
+
+    class Config:
+        orm_mode: True
+
+settings = Settings(db=DatabaseSettings(), 
+                    md=MiddlewareSettings(), 
+                    mt=MetadataSettings())
