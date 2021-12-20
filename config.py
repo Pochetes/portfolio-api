@@ -15,37 +15,37 @@ class Settings(BaseSettings):
     DB_NAME: str = "portfolio"
     DB_URL: str = "MONGODB_URI"
     DESC: str = """
-        This is an API that retrieves information about Roberto Martinez's personal and work life. 🚀
-        
-        For now, we have 5 broad endpoints that describe everything there is to know. However, some of the
-        endpoint methods will be unavailable to users as they are authenticated for my use only.
+This is an API that retrieves information about Roberto Martinez's personal and work life. 🚀
 
-        ### User 👨🏼
+For now, we have 5 broad endpoints that describe everything there is to know. However, some of the
+endpoint methods will be unavailable to users as they are authenticated for my use only.
 
-        You will be able to see my:
-        -name.
-        -email.
-        -brief description.
+### User 👨🏼
 
-        ### Contacts 📲
+You will be able to see my:
+-name.
+-email.
+-brief description.
 
-        Here will be my **social media** links.
+### Contacts 📲
 
-        ### Skills 🌟
+Here will be my **social media** links.
 
-        This section holds the **technical** skills that I possess.
+### Skills 🌟
 
-        ### Experiences 📈
+This section holds the **technical** skills that I possess.
 
-        Here will be the experiences that I've had throughout my journey pursuing **Software Engineering**.
+### Experiences 📈
 
-        ### Interests 🤔
+Here will be the experiences that I've had throughout my journey pursuing **Software Engineering**.
 
-        This will retrieve my interests **in** and **outside** the technology world.
+### Interests 🤔
 
-        ### Projects 💡
+This will retrieve my interests **in** and **outside** the technology world.
 
-        This will return my software related projects that I have worked on.
-    """
+### Projects 💡
+
+This will return my software related projects that I have worked on.
+"""
 
 settings = Settings()
