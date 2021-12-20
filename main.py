@@ -13,36 +13,40 @@ from endpoints.experiences.routers import router as experiencesRouter
 from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
 
-load_dotenv()
-MONGODB_URI = os.environ[settings.DB_URL]
-
 @lru_cache
 def getSettings():
     return settings
 
-getSettings()
+# naming settings for each class
+db = getSettings().db
+md = getSettings().md
+mt = getSettings().mt
+
+load_dotenv()
+MONGODB_URI = os.environ[db.DB_URI]
+
 
 app = FastAPI(
-    title=settings.APP_NAME,
-    description=settings.DESC,
-    version=settings.VERSION,
-    contact=settings.CONTACT,
-    license_info=settings.LICENSE
+    title=mt.APP_NAME,
+    description=mt.DESC,
+    version=mt.VERSION,
+    contact=mt.CONTACT,
+    license_info=mt.LICENSE
 )
 
 # ========= CORS Middleware =========
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=md.CORS_ORIGINS,
+    allow_credentials=md.CORS_CRED,
+    allow_methods=md.CORS_METHODS,
+    allow_headers=md.CORS_HEADERS
 )
 
 @app.on_event("startup")
 def startupDBClient():
     app.client = MongoClient(MONGODB_URI)
-    app.db = app.client[settings.DB_NAME]
+    app.db = app.client[db.DB_NAME]
 
 @app.on_event("shutdown")
 def shutdownDBClient():
@@ -58,5 +62,5 @@ app.include_router(projectsRouter, tags=['projects'])
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        reload=settings.DEBUG_MODE,
+        reload=mt.DEBUG_MODE
     )
