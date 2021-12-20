@@ -52,9 +52,9 @@ endpoint methods will be unavailable to users as they are authenticated for my u
 ### User 👨🏼
 
 You will be able to see my:
--name.
--email.
--brief description.
+* name.
+* email.
+* brief description.
 
 ### Contacts 📲
 
