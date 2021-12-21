@@ -4,23 +4,23 @@ Contains data about my software-related projects that I have been working during
 
 ## Methods
 
-#### `GET` /projects
+### `GET` /projects
 
 Gets all projects.
 
-#### `POST` /projects
+### `POST` /projects
 
 Creates a new project.
 
-#### `GET` /projects/{id}
+### `GET` /projects/{id}
 
 Gets an project by id.
 
-#### `PUT` /projects/{id}
+### `PUT` /projects/{id}
 
 Updates an project. Gets an project by id.
 
-#### `DELETE` /projects/{id}
+### `DELETE` /projects/{id}
 
 Deletes an project by id.
 

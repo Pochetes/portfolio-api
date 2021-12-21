@@ -4,23 +4,23 @@ Contains data about my work experiences such as internships and jobs.
 
 ## Methods
 
-#### `GET` /experiences
+### `GET` /experiences
 
 Gets all experiences.
 
-#### `POST` /experiences
+### `POST` /experiences
 
 Creates a new experience.
 
-#### `GET` /experiences/{id}
+### `GET` /experiences/{id}
 
 Gets an experience by id.
 
-#### `PUT` /experiences/{id}
+### `PUT` /experiences/{id}
 
 Updates an experience. Gets an experience by id.
 
-#### `DELETE` /experiences/{id}
+### `DELETE` /experiences/{id}
 
 Deletes an experience by id.
 

@@ -4,23 +4,23 @@ Contains data about my social media handles and their links to them.
 
 ## Methods
 
-#### `GET` /contacts
+### `GET` /contacts
 
 Gets all contacts.
 
-#### `POST` /contacts
+### `POST` /contacts
 
 Creates a new contact.
 
-#### `GET` /contacts/{title}
+### `GET` /contacts/{title}
 
 Gets a contact by title.
 
-#### `PUT` /contacts/{title}
+### `PUT` /contacts/{title}
 
 Updates a contact. Gets a contact by title.
 
-#### `DELETE` /contacts/{title}
+### `DELETE` /contacts/{title}
 
 Deletes a contact by title.
 

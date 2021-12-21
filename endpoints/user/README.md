@@ -4,15 +4,15 @@ Contains data about me such as my name, email and a brief description about me.
 
 ## Methods
 
-#### `GET` /user
+### `GET` /user
 
 Gets all user, which should only be me.
 
-#### `POST` /user
+### `POST` /user
 
 Creates a new user. THIS SHOULD ONLY BE DONE ONCE!
 
-#### `PUT` /user/{technology}
+### `PUT` /user/{technology}
 
 Updates the user. Should only really be the description.
 

@@ -4,23 +4,23 @@ Contains data about the technical skills I possess as a Software Engineer.
 
 ## Methods
 
-#### `GET` /skills
+### `GET` /skills
 
 Gets all skills.
 
-#### `POST` /skills
+### `POST` /skills
 
 Creates a new skill.
 
-#### `GET` /skills/{technology}
+### `GET` /skills/{technology}
 
 Gets an skill by technology.
 
-#### `PUT` /skills/{technology}
+### `PUT` /skills/{technology}
 
 Updates an skill. Gets an skill by technology.
 
-#### `DELETE` /skills/{technology}
+### `DELETE` /skills/{technology}
 
 Deletes an skill by technology.
 

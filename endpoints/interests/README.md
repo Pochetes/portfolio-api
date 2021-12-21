@@ -4,23 +4,23 @@ Contains data about my interests in the technology field and outside of it as we
 
 ## Methods
 
-#### `GET` /interests
+### `GET` /interests
 
 Gets all interests.
 
-#### `POST` /interests
+### `POST` /interests
 
 Creates a new interest.
 
-#### `GET` /interests/{id}
+### `GET` /interests/{id}
 
 Gets an interest by id.
 
-#### `PUT` /interests/{id}
+### `PUT` /interests/{id}
 
 Updates an interest. Gets an interest by id.
 
-#### `DELETE` /interests/{id}
+### `DELETE` /interests/{id}
 
 Deletes an interest by id.
 
