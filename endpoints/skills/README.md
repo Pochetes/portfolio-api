@@ -52,4 +52,3 @@ Parameter | Required/Optional | Description | Type
 `image` | optional | File location that the image is stored in. | `string`
 
 *Id is not included because MongoDB automatically generates that for us. Therefore, we can't and do not manipulate it.
-

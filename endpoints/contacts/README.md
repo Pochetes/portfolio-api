@@ -51,4 +51,5 @@ Parameter | Required/Optional | Description | Type
 `title` | required | The value for the `Contact` object you want to look up. | `string`
 `link` | optional | The link to the social media page | `string`
 
+*Id is not included because MongoDB automatically generates that for us. Therefore, we can't and do not manipulate it.
 
