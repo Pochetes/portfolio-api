@@ -121,32 +121,32 @@ You will be able to see my:
 - email.
 - brief description.
 
-See a detailed description at: [User Docs](endpoints/user/docs.md)
+See a detailed description at: [User Docs](endpoints/user/README.md)
 
 ### Contacts 📲
 Here will be my **social media** links.
 
-See a detailed description at: [Contacts Docs](endpoints/contacts/docs.md)
+See a detailed description at: [Contacts Docs](endpoints/contacts/README.md)
 
 ### Skills 🌟
 This section holds the **technical** skills that I possess.
 
-See a detailed description at: [Skills Docs](endpoints/skills/docs.md)
+See a detailed description at: [Skills Docs](endpoints/skills/README.md)
 
 ### Experiences 📈
 Here will be the experiences that I've had throughout my journey pursuing **Software Engineering**.
 
-See a detailed description at: [Experiences Docs](endpoints/experiences/docs.md)
+See a detailed description at: [Experiences Docs](endpoints/experiences/README.md)
 
 ### Interests 🤔
 This will retrieve my interests **in** and **outside** the technology world.
 
-See a detailed description at: [Interests Docs](endpoints/interests/docs.md)
+See a detailed description at: [Interests Docs](endpoints/interests/README.md)
 
 ### Projects 💡
 This will return my software related projects that I have worked on.
 
-See a detailed description at: [Projects Docs](endpoints/projects/docs.md)
+See a detailed description at: [Projects Docs](endpoints/projects/README.md)
 
 ## Configuration
 
