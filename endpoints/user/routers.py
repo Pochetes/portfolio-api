@@ -22,7 +22,7 @@ def get_all_users(request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "Person does not exist!")
+    raise HTTPException(400, "user does not exist!")
 
 # CREATE a new user (should only be done once)
 @router.post('', response_model=User)
@@ -40,6 +40,9 @@ def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
 def update_the_current_user(firstName: str, user: User, request: Request):
+    if request.app.db['user'].find({"firstName": firstName}, {"$exists": False}):
+        raise HTTPException(400, f"User with first name {firstName} does not exist!")
+
     updatedUser = user.dict()
     request.app.db['user'].update_one({"firstName": firstName}, {"$set": updatedUser})
     # converts list object to str (JSON format)
@@ -48,5 +51,5 @@ def update_the_current_user(firstName: str, user: User, request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "Person does not exist!")
+    raise HTTPException(400, "user does not exist!")
 # ================== END /user endpoint ==================

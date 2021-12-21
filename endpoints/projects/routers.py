@@ -38,6 +38,14 @@ def create_a_new_project(request: Request, project: Project = Body(...)):
 # GET a project by id
 @router.get('/{id}', response_model=Project)
 def get_a_project_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Project with id {id} does not exist!")    
+    
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
     
@@ -49,6 +57,14 @@ def get_a_project_by_id(id: str, request: Request):
 # UPDATE a project by id
 @router.put('/{id}', response_model=UpdateProject)
 def update_a_project_by_id(id: str, request: Request, project: UpdateProject = Body(...)):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Project with id {id} does not exist!")    
+    
     updatedProject = project.dict()
     request.app.db['projects'].update_one({"_id": ObjectId(id)}, { "$set": updatedProject})
     # converts list object to str (JSON format)
@@ -62,6 +78,14 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
 # DELETE a project by id
 @router.delete('/{id}', response_model=Project)
 def delete_a_project_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Project with id {id} does not exist!")
+
     deletedProject = request.app.db["projects"].delete_one({"_id": ObjectId(id)})
 
     if deletedProject.deleted_count == 1:

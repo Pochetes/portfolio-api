@@ -38,6 +38,14 @@ def create_a_new_interest(request: Request, interest: Interest = Body(...)):
 # GET an interest by id
 @router.get('/{id}', response_model=Interest)
 def get_an_interest_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Interest with id {id} does not exist!")
+
     interest = request.app.db['interests'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(interest, default=json_util.default))
     
@@ -49,6 +57,14 @@ def get_an_interest_by_id(id: str, request: Request):
 # UPDATE an interest by id
 @router.put('/{id}', response_model=UpdateInterest)
 def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest = Body(...)):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Interest with id {id} does not exist!")
+    
     updatedInterest = interest.dict()
     request.app.db['interests'].update_one({"_id": ObjectId(id)}, { "$set": updatedInterest})
     # converts list object to str (JSON format)
@@ -62,6 +78,14 @@ def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest
 # DELETE an interest by id
 @router.delete('/{id}', response_model=Interest)
 def delete_an_interest_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Interest with id {id} does not exist!")
+
     deletedInterest = request.app.db["interests"].delete_one({"_id": ObjectId(id)})
 
     if deletedInterest.deleted_count == 1:

@@ -38,6 +38,10 @@ def create_a_new_contact(contact: Contact, request: Request):
 # GET a contact by title
 @router.get('/{title}', response_model=Contact)
 def get_a_contact_by_title(title: str, request: Request):
+    # checks if title exists in MongoDB db
+    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+        raise HTTPException(400, f"Contact from {title} does not exist!")
+
     contact = request.app.db['contacts'].find_one({"title": title})
 
     response = json.loads(json.dumps(contact, default=json_util.default))
@@ -49,6 +53,10 @@ def get_a_contact_by_title(title: str, request: Request):
 # UPDATE a contact by title
 @router.put('/{title}', response_model=UpdateContact)
 def update_a_contact_by_title(title: str, contact: Contact, request: Request):
+    # checks if title exists in MongoDB db
+    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+        raise HTTPException(400, f"Contact from {title} does not exist!")
+
     updatedContact = contact.dict()
     request.app.db['contacts'].update_one({"title": title}, { "$set": updatedContact})
     # converts list object to str (JSON format)
@@ -62,6 +70,10 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
 # DELETE a contact by title
 @router.delete('/{title}', response_model=Contact)
 def delete_a_contact_by_title(title: str, request: Request):
+    # checks if title exists in MongoDB db
+    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+        raise HTTPException(400, f"Contact from {title} does not exist!")    
+    
     deletedContact = request.app.db["contacts"].delete_one({"title": title})
 
     if deletedContact.deleted_count == 1:

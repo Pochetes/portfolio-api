@@ -38,6 +38,14 @@ def create_a_new_experience(request: Request, experience: Experience = Body(...)
 # GET an experience by id
 @router.get('/{id}', response_model=Experience)
 def get_an_experience_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Experience with id {id} does not exist!")
+        
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
 
     response = json.loads(json.dumps(experience, default=json_util.default))
@@ -49,6 +57,14 @@ def get_an_experience_by_id(id: str, request: Request):
 # UPDATE an experience by id
 @router.put('/{id}', response_model=UpdateExperience)
 def update_an_experience_by_id(id: str, request: Request, experience: UpdateExperience = Body(...)):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Experience with id {id} does not exist!")
+    
     updatedExperience = experience.dict()
     request.app.db['experiences'].update_one({"_id": ObjectId(id)}, { "$set": updatedExperience})
     # converts list object to str (JSON format)
@@ -62,6 +78,14 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
 # DELETE an experience by id
 @router.delete('/{id}', response_model=Experience)
 def delete_an_experience_by_id(id: str, request: Request):
+    # check if valid ObjectId
+    if not ObjectId.is_valid(id):
+        raise HTTPException(404, f"id {id} is invalid")
+
+    # check if valid ObjectId exists!
+    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+        raise HTTPException(400, f"Experience with id {id} does not exist!")
+
     deletedExperience = request.app.db["experiences"].delete_one({"_id": ObjectId(id)})
 
     if deletedExperience.deleted_count == 1:
