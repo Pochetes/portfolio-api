@@ -148,6 +148,30 @@ This will return my software related projects that I have worked on.
 
 See a detailed description at: [Projects Docs](endpoints/projects/README.md)
 
+## Documentation
+
+Thanks to FastAPI, a documentation page is automatically rendered for us. This follows the OpenAPI Spec rules.
+
+To see the docs, go to [docs](http://localhost:8000/docs) when it's deployed.
+
+### Using a `GET` method
+
+The `GET` method allows you to access all the data from a specific resource. It is done, like so:
+
+![GET method](media/GETmethod.gif)
+
+### Using a `POST` method
+
+The `POST` method allows you to create a new data entry for a specific resource. There will be a Request body in which you will fill out all contents needed, like so:
+
+![POST method](media/POSTmethod.gif)
+
+### Using a method that has a path parameter
+
+A method that has a path parameter usually requires some sort of input to find, update, delete a specific resource. In this example, we are finding a single project by an `id` path parameter. To do this, copy the parameter from the first `GET` method and use it as the current path parameter, like so:
+
+![Params](media/Params.gif)
+
 ## Configuration
 
 To run this project, you need a couple things:
