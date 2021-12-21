@@ -14,7 +14,7 @@ class Project(BaseModel):
             "example": {
                 "title": "Navi Web Companion",
                 "description": "A Google Chrome extension",
-                "image": "<link_to_image>",
+                "image": "public/images/projects/<file_name>",
                 "link": "https://www.Github.com/..."
             }
         }
@@ -30,7 +30,7 @@ class UpdateProject(BaseModel):
             "example": {
                 "title": "Navi Web Companion",
                 "description": "A Google Chrome extension",
-                "image": "<link_to_image>",
+                "image": "public/images/projects/<file_name>",
                 "link": "https://www.Github.com/..."
             }
         }

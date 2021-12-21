@@ -11,7 +11,7 @@ class Interest(BaseModel):
         schema_extra = {
             "example": {
                 "topic": "Blockchain",
-                "image": "<link_to_image>"
+                "image": "public/images/interests/<file_name>"
             }
         }
 
@@ -23,7 +23,7 @@ class UpdateInterest(BaseModel):
         schema_extra = {
             "example": {
                 "topic": "Blockchain",
-                "image": "<link_to_image>"
+                "image": "public/images/interests/<file_name>"
             }
         }
 # ========= END /interests Endpoint =========

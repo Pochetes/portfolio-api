@@ -6,6 +6,7 @@ class User(BaseModel):
     firstName: str = Field(...)
     lastName: str = Field(...)
     email: EmailStr = Field(...)
+    image: str = Field(...)
     description: str = Field(...)
 
     class Config:
@@ -15,6 +16,7 @@ class User(BaseModel):
                 "firstName": "John",
                 "lastName": "Doe",
                 "email": "johndoe@email.com",
+                "image": "public/images/<file_name>",
                 "description": "A very nice guy indeed!"
             }
         }
@@ -22,6 +24,7 @@ class UpdateUser(BaseModel):
     firstName: Optional[str]
     lastName: Optional[str]
     email: Optional[EmailStr]
+    image: Optional[str]
     description: Optional[str]
 
     class Config:
@@ -30,6 +33,7 @@ class UpdateUser(BaseModel):
                 "firstName": "John",
                 "lastName": "Doe",
                 "email": "johndoe@email.com",
+                "image": "public/images/<file_name>",
                 "description": "A very nice guy indeed!"
             }
         }

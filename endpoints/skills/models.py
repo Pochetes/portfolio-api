@@ -11,7 +11,7 @@ class Skill(BaseModel):
         schema_extra = {
             "example": {
                 "technology": "Python",
-                "image": "<link_to_image>"
+                "image": "public/images/skills/<file_name>"
             }
         }
 class UpdateSkill(BaseModel):
@@ -22,7 +22,7 @@ class UpdateSkill(BaseModel):
         schema_extra = {
             "example": {
                 "technology": "Python",
-                "image": "<link_to_image>"
+                "image": "public/images/skills/<file_name>"
             }
         }
 # ========= END /skills Endpoint =========

@@ -17,7 +17,7 @@ class Experience(BaseModel):
                 "position": "Software Engineer Intern",
                 "dateStarted": "June 2021",
                 "dateEnded": "August 2021",
-                "image": "<link_to_image>"
+                "image": "public/images/experiences/<file_name>"
             }
         }
 
@@ -35,7 +35,7 @@ class UpdateExperience(BaseModel):
                 "position": "Software Engineer Intern",
                 "dateStarted": "June 2021",
                 "dateEnded": "August 2021",
-                "image": "<link_to_image>"
+                "image": "public/images/experiences/<file_name>"
             }
         }
 # ========= END /experience Endpoint =========
