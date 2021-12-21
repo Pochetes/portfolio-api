@@ -21,7 +21,7 @@ def get_all_skills(request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "No skills found!")
+    raise HTTPException(404, "No skills found!")
 
 # CREATE a new skill
 @router.post('', response_model=Skill)
@@ -32,16 +32,16 @@ def create_a_new_skill(skill: Skill, request: Request):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newSkill, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)
+        return JSONResponse(response, 201)
 
-    raise HTTPException(404, "Bad request")
+    raise HTTPException(400, "Bad request")
 
 # GET a skill by skill type
 @router.get('/{technology}', response_model=Skill)
 def get_a_skill_by_technology(technology: str, request: Request):
     # check if technology exists in MongoDB db
     if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
-        raise HTTPException(400, f"{technology} skill does not exist!")
+        raise HTTPException(404, f"{technology} skill does not exist!")
 
     oneSkill = request.app.db['skills'].find_one({"technology": technology})
 
@@ -56,7 +56,7 @@ def get_a_skill_by_technology(technology: str, request: Request):
 def update_a_skill_by_technology(technology: str, skill: Skill, request: Request):
     # check if technology exists in MongoDB db
     if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
-        raise HTTPException(400, f"{technology} skill does not exist!")
+        raise HTTPException(404, f"{technology} skill does not exist!")
 
     updatedSkill = skill.dict()
     request.app.db['skills'].update_one({"technology": technology}, { "$set": updatedSkill})
@@ -66,14 +66,14 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "Person does not exist!")
+    raise HTTPException(404, "Person does not exist!")
 
 # DELETE a skill by skill type
 @router.delete('/{technology}', response_model=Skill)
 def delete_a_skill_by_technology(technology: str, request: Request):
     # check if technology exists in MongoDB db
     if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
-        raise HTTPException(400, f"{technology} skill does not exist!")
+        raise HTTPException(404, f"{technology} skill does not exist!")
 
     deletedSkill = request.app.db["skills"].delete_one({"technology": technology})
 

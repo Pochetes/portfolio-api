@@ -20,7 +20,7 @@ def get_all_interests(request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "No interests found!")
+    raise HTTPException(404, "No interests found!")
 
 # CREATE a new interest
 @router.post('', response_model=Interest)
@@ -31,9 +31,9 @@ def create_a_new_interest(request: Request, interest: Interest = Body(...)):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newinterest, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)
+        return JSONResponse(response, 201)
 
-    raise HTTPException(404, "Bad request")
+    raise HTTPException(400, "Bad request")
 
 # GET an interest by id
 @router.get('/{id}', response_model=Interest)
@@ -44,7 +44,7 @@ def get_an_interest_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Interest with id {id} does not exist!")
+        raise HTTPException(404, f"Interest with id {id} does not exist!")
 
     interest = request.app.db['interests'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(interest, default=json_util.default))
@@ -63,7 +63,7 @@ def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest
 
     # check if valid ObjectId exists!
     if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Interest with id {id} does not exist!")
+        raise HTTPException(404, f"Interest with id {id} does not exist!")
     
     updatedInterest = interest.dict()
     request.app.db['interests'].update_one({"_id": ObjectId(id)}, { "$set": updatedInterest})
@@ -73,7 +73,7 @@ def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, f"interest with id {id} does not exist!")
+    raise HTTPException(404, f"interest with id {id} does not exist!")
 
 # DELETE an interest by id
 @router.delete('/{id}', response_model=Interest)
@@ -84,7 +84,7 @@ def delete_an_interest_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Interest with id {id} does not exist!")
+        raise HTTPException(404, f"Interest with id {id} does not exist!")
 
     deletedInterest = request.app.db["interests"].delete_one({"_id": ObjectId(id)})
 

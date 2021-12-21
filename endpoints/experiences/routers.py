@@ -20,7 +20,7 @@ def get_all_experiences(request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "No experiences found!")
+    raise HTTPException(404, "No experiences found!")
 
 # CREATE a new experience
 @router.post('', response_model=Experience)
@@ -31,9 +31,9 @@ def create_a_new_experience(request: Request, experience: Experience = Body(...)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newExperience, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)
+        return JSONResponse(response, 201)
     
-    raise HTTPException(404, "Bad request")
+    raise HTTPException(400, "Bad request")
 
 # GET an experience by id
 @router.get('/{id}', response_model=Experience)
@@ -44,7 +44,7 @@ def get_an_experience_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Experience with id {id} does not exist!")
+        raise HTTPException(404, f"Experience with id {id} does not exist!")
         
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
 
@@ -63,7 +63,7 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
 
     # check if valid ObjectId exists!
     if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Experience with id {id} does not exist!")
+        raise HTTPException(404, f"Experience with id {id} does not exist!")
     
     updatedExperience = experience.dict()
     request.app.db['experiences'].update_one({"_id": ObjectId(id)}, { "$set": updatedExperience})
@@ -73,7 +73,7 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
     if response is not None:
         return JSONResponse(response, 200)
     
-    raise HTTPException(400, f"Experience with id {id} does not exist!")
+    raise HTTPException(404, f"Experience with id {id} does not exist!")
 
 # DELETE an experience by id
 @router.delete('/{id}', response_model=Experience)
@@ -84,7 +84,7 @@ def delete_an_experience_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Experience with id {id} does not exist!")
+        raise HTTPException(404, f"Experience with id {id} does not exist!")
 
     deletedExperience = request.app.db["experiences"].delete_one({"_id": ObjectId(id)})
 

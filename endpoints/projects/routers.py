@@ -20,7 +20,7 @@ def get_all_projects(request: Request):
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, "No projects found!")
+    raise HTTPException(404, "No projects found!")
 
 # CREATE a new project
 @router.post('', response_model=Project)
@@ -31,9 +31,9 @@ def create_a_new_project(request: Request, project: Project = Body(...)):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newProject, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)
+        return JSONResponse(response, 201)
 
-    raise HTTPException(404, "Bad request")
+    raise HTTPException(400, "Bad request")
 
 # GET a project by id
 @router.get('/{id}', response_model=Project)
@@ -44,7 +44,7 @@ def get_a_project_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Project with id {id} does not exist!")    
+        raise HTTPException(404, f"Project with id {id} does not exist!")    
     
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
@@ -63,7 +63,7 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
 
     # check if valid ObjectId exists!
     if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Project with id {id} does not exist!")    
+        raise HTTPException(404, f"Project with id {id} does not exist!")    
     
     updatedProject = project.dict()
     request.app.db['projects'].update_one({"_id": ObjectId(id)}, { "$set": updatedProject})
@@ -73,7 +73,7 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
     if response is not None:
         return JSONResponse(response, 200)
 
-    raise HTTPException(400, f"project with id {id} does not exist!")
+    raise HTTPException(404, f"project with id {id} does not exist!")
 
 # DELETE a project by id
 @router.delete('/{id}', response_model=Project)
@@ -84,7 +84,7 @@ def delete_a_project_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
-        raise HTTPException(400, f"Project with id {id} does not exist!")
+        raise HTTPException(404, f"Project with id {id} does not exist!")
 
     deletedProject = request.app.db["projects"].delete_one({"_id": ObjectId(id)})
 
