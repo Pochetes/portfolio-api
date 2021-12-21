@@ -42,13 +42,13 @@ Deletes a contact by title.
 
 Parameter | Required/Optional | Description | Type
 ------ | -------- | -------- | -------- 
-`title` | required | The value for the `Interest` object you want to look up. | `string`
+`title` | required | The value for the `Contact` object you want to look up. | `string`
 
 ### Query Params
 
 Parameter | Required/Optional | Description | Type
 ------ | -------- | -------- | -------- 
-`title` | required | The value for the `Interest` object you want to look up. | `string`
+`title` | required | The value for the `Contact` object you want to look up. | `string`
 `link` | optional | The link to the social media page | `string`
 
 
