@@ -18,10 +18,10 @@ def get_all_skills(request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(skills, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-       raise HTTPException(400, "No skills found!")
+
+    raise HTTPException(400, "No skills found!")
 
 # CREATE a new skill
 @router.post('', response_model=Skill)
@@ -31,10 +31,10 @@ def create_a_new_skill(skill: Skill, request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newSkill, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Bad request")
+
+    raise HTTPException(404, "Bad request")
 
 # GET a skill by skill type
 @router.get('/{technology}', response_model=Skill)
@@ -42,10 +42,10 @@ def get_a_skill_by_technology(technology: str, request: Request):
     oneSkill = request.app.db['skills'].find_one({"technology": technology})
 
     response = json.loads(json.dumps(oneSkill, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(404, f"{technology} skill not found")
+
+    raise HTTPException(404, f"{technology} skill not found")
 
 # UPDATE a skill by skill type
 @router.put('/{technology}', response_model=UpdateSkill)
@@ -55,10 +55,10 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedSkill, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Person does not exist!")
+
+    raise HTTPException(400, "Person does not exist!")
 
 # DELETE a skill by skill type
 @router.delete('/{technology}', response_model=Skill)

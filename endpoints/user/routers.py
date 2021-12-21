@@ -19,10 +19,10 @@ def get_all_users(request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(foundUser, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Person does not exist!")
+
+    raise HTTPException(400, "Person does not exist!")
 
 # CREATE a new user (should only be done once)
 @router.post('', response_model=User)
@@ -32,21 +32,21 @@ def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newUser, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Bad Request")
+
+    raise HTTPException(404, "Bad Request")
     
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
 def update_the_current_user(firstName: str, user: User, request: Request):
     updatedUser = user.dict()
-    request.app.db['user'].update_one({"firstName": firstName}, { "$set": updatedUser})
+    request.app.db['user'].update_one({"firstName": firstName}, {"$set": updatedUser})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedUser, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Person does not exist!")
+
+    raise HTTPException(400, "Person does not exist!")
 # ================== END /user endpoint ==================

@@ -17,10 +17,10 @@ def get_all_projects(request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(projects, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-       raise HTTPException(400, "No projects found!")
+
+    raise HTTPException(400, "No projects found!")
 
 # CREATE a new project
 @router.post('', response_model=Project)
@@ -30,10 +30,10 @@ def create_a_new_project(request: Request, project: Project = Body(...)):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newProject, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Bad request")
+
+    raise HTTPException(404, "Bad request")
 
 # GET a project by id
 @router.get('/{id}', response_model=Project)
@@ -41,10 +41,10 @@ def get_a_project_by_id(id: str, request: Request):
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
     
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(404, f"project with id {id} not found")
+
+    raise HTTPException(404, f"project with id {id} not found")
 
 # UPDATE a project by id
 @router.put('/{id}', response_model=UpdateProject)
@@ -54,10 +54,10 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedProject, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, f"project with id {id} does not exist!")
+
+    raise HTTPException(400, f"project with id {id} does not exist!")
 
 # DELETE a project by id
 @router.delete('/{id}', response_model=Project)

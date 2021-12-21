@@ -17,10 +17,10 @@ def get_all_contacts(request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(contacts, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-       raise HTTPException(400, "No contacts found!")
+    
+    raise HTTPException(400, "No contacts found!")
 
 # CREATE a new contact
 @router.post('', response_model=Contact)
@@ -30,10 +30,10 @@ def create_a_new_contact(contact: Contact, request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newContact, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Bad request")
+    
+    raise HTTPException(404, "Bad request")
 
 # GET a contact by title
 @router.get('/{title}', response_model=Contact)
@@ -41,10 +41,10 @@ def get_a_contact_by_title(title: str, request: Request):
     contact = request.app.db['contacts'].find_one({"title": title})
 
     response = json.loads(json.dumps(contact, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(404, f"Contact from {title} not found")
+
+    raise HTTPException(404, f"Contact from {title} not found")
 
 # UPDATE a contact by title
 @router.put('/{title}', response_model=UpdateContact)
@@ -54,10 +54,10 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedContact, default=json_util.default))
-    if response:
+    if response is not None:
         return JSONResponse(response, 200)
-    else:
-        raise HTTPException(400, "Person does not exist!")
+        
+    raise HTTPException(400, f"Contact from {title} does not exist!")
 
 # DELETE a contact by title
 @router.delete('/{title}', response_model=Contact)
