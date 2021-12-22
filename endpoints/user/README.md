@@ -12,7 +12,7 @@ Gets all user, which should only be me.
 
 Creates a new user. THIS SHOULD ONLY BE DONE ONCE!
 
-### `PUT` /user/{technology}
+### `PUT` /user
 
 Updates the user. Should only really be the description.
 
