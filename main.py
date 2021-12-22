@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 import os, uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

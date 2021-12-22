@@ -1,6 +1,7 @@
+# pylint: disable=missing-docstring
 from pydantic import BaseSettings
 
-# CHANGE  
+# CHANGE
 class DatabaseSettings(BaseSettings):
     DB_NAME: str = "portfolio"
     DB_URI: str = "MONGODB_URI"
@@ -28,7 +29,7 @@ class MiddlewareSettings(BaseSettings):
     ]
 
     class Config:
-        orm_mode = True    
+        orm_mode = True
 
 # CHANGE
 class MetadataSettings(BaseSettings):
@@ -80,7 +81,7 @@ This will return my software related projects that I have worked on.
     class Config:
         orm_mode = True
 
-# container class for all settings        
+# container class for all settings
 class Settings(BaseSettings):
     db: DatabaseSettings
     md: MiddlewareSettings
@@ -89,6 +90,6 @@ class Settings(BaseSettings):
     class Config:
         orm_mode: True
 
-settings = Settings(db=DatabaseSettings(), 
-                    md=MiddlewareSettings(), 
+settings = Settings(db=DatabaseSettings(),
+                    md=MiddlewareSettings(),
                     mt=MetadataSettings())
