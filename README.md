@@ -20,71 +20,77 @@ The api returns JSON responses in the `applications/json` format. It has a total
 ├── README.md
 ├── __init__.py
 ├── __pycache__
-│   ├── config.cpython-39.pyc
-│   ├── database.cpython-39.pyc
-│   ├── main.cpython-39.pyc
-│   └── models.cpython-39.pyc
+│   ├── config.cpython-39.pyc
+│   ├── database.cpython-39.pyc
+│   ├── main.cpython-39.pyc
+│   └── models.cpython-39.pyc
 ├── config.py
 ├── endpoints
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   └── __init__.cpython-39.pyc
-│   ├── contacts
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── docs.md
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── experiences
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── docs.md
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── interests
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── docs.md
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── projects
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── docs.md
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── skills
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── docs.md
-│   │   ├── models.py
-│   │   └── routers.py
-│   └── user
-│       ├── __init__.py
-│       ├── __pycache__
-│       │   ├── __init__.cpython-39.pyc
-│       │   ├── models.cpython-39.pyc
-│       │   └── routers.cpython-39.pyc
-│       ├── docs.md
-│       ├── models.py
-│       └── routers.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   └── __init__.cpython-39.pyc
+│   ├── contacts
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── experiences
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── interests
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── projects
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── skills
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   └── user
+│       ├── README.md
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-39.pyc
+│       │   ├── models.cpython-39.pyc
+│       │   └── routers.cpython-39.pyc
+│       ├── models.py
+│       └── routers.py
 ├── main.py
+├── media
+│   ├── GETmethod.gif
+│   ├── POSTmethod.gif
+│   └── Params.gif
 └── requirements.txt
+
+16 directories, 57 files
 ```
 
 ### Technologies Used
