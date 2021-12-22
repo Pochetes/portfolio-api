@@ -7,13 +7,13 @@ fastapi==0.70.1
 h11==0.12.0
 httptools==0.3.0
 idna==3.3
-motor==2.5.1
 pydantic==1.8.2
 pykerberos==1.2.1
-pymongo==3.12.3
+pymongo==4.0.1
 python-dotenv==0.19.2
 python-snappy==0.6.0
 PyYAML==6.0
+six==1.16.0
 sniffio==1.2.0
 starlette==0.16.0
 typing_extensions==4.0.1

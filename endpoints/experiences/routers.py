@@ -43,7 +43,7 @@ def get_an_experience_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['experiences'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Experience with id {id} does not exist!")
         
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
@@ -62,7 +62,7 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['experiences'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Experience with id {id} does not exist!")
     
     updatedExperience = experience.dict()
@@ -83,7 +83,7 @@ def delete_an_experience_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['experiences'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['experiences'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Experience with id {id} does not exist!")
 
     deletedExperience = request.app.db["experiences"].delete_one({"_id": ObjectId(id)})

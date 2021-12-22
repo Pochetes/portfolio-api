@@ -40,7 +40,7 @@ def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
 def update_the_current_user(firstName: str, user: User, request: Request):
-    if request.app.db['user'].find({"firstName": firstName}, {"$exists": False}):
+    if request.app.db['user'].count_documents({"firstName": firstName}) == 0:
         raise HTTPException(404, f"User with first name {firstName} does not exist!")
 
     updatedUser = user.dict()

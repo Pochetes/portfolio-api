@@ -39,7 +39,7 @@ def create_a_new_contact(contact: Contact, request: Request):
 @router.get('/{title}', response_model=Contact)
 def get_a_contact_by_title(title: str, request: Request):
     # checks if title exists in MongoDB db
-    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+    if request.app.db['contacts'].count_documents({"title": title}) == 0:
         raise HTTPException(404, f"Contact from {title} does not exist!")
 
     contact = request.app.db['contacts'].find_one({"title": title})
@@ -54,7 +54,7 @@ def get_a_contact_by_title(title: str, request: Request):
 @router.put('/{title}', response_model=UpdateContact)
 def update_a_contact_by_title(title: str, contact: Contact, request: Request):
     # checks if title exists in MongoDB db
-    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+    if request.app.db['contacts'].count_documents({"title": title}) == 0:
         raise HTTPException(404, f"Contact from {title} does not exist!")
 
     updatedContact = contact.dict()
@@ -71,7 +71,7 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
 @router.delete('/{title}', response_model=Contact)
 def delete_a_contact_by_title(title: str, request: Request):
     # checks if title exists in MongoDB db
-    if request.app.db['contacts'].find({"title": title}, {"$exists": False}):
+    if request.app.db['contacts'].count_documents({"title": title}) == 0:
         raise HTTPException(404, f"Contact from {title} does not exist!")    
     
     deletedContact = request.app.db["contacts"].delete_one({"title": title})

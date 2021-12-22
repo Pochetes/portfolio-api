@@ -43,7 +43,7 @@ def get_an_interest_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['interests'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Interest with id {id} does not exist!")
 
     interest = request.app.db['interests'].find_one({"_id": ObjectId(id)})
@@ -62,7 +62,7 @@ def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['interests'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Interest with id {id} does not exist!")
     
     updatedInterest = interest.dict()
@@ -83,7 +83,7 @@ def delete_an_interest_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['interests'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['interests'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Interest with id {id} does not exist!")
 
     deletedInterest = request.app.db["interests"].delete_one({"_id": ObjectId(id)})

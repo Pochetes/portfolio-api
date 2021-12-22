@@ -40,7 +40,7 @@ def create_a_new_skill(skill: Skill, request: Request):
 @router.get('/{technology}', response_model=Skill)
 def get_a_skill_by_technology(technology: str, request: Request):
     # check if technology exists in MongoDB db
-    if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
+    if request.app.db['skills'].count_documents({"technology": technology}) == 0:
         raise HTTPException(404, f"{technology} skill does not exist!")
 
     oneSkill = request.app.db['skills'].find_one({"technology": technology})
@@ -55,7 +55,7 @@ def get_a_skill_by_technology(technology: str, request: Request):
 @router.put('/{technology}', response_model=UpdateSkill)
 def update_a_skill_by_technology(technology: str, skill: Skill, request: Request):
     # check if technology exists in MongoDB db
-    if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
+    if request.app.db['skills'].count_documents({"technology": technology}) == 0:
         raise HTTPException(404, f"{technology} skill does not exist!")
 
     updatedSkill = skill.dict()
@@ -72,7 +72,7 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
 @router.delete('/{technology}', response_model=Skill)
 def delete_a_skill_by_technology(technology: str, request: Request):
     # check if technology exists in MongoDB db
-    if request.app.db['skills'].find({"technology": technology}, {"$exists": False}):
+    if request.app.db['skills'].count_documents({"technology": technology}) == 0:
         raise HTTPException(404, f"{technology} skill does not exist!")
 
     deletedSkill = request.app.db["skills"].delete_one({"technology": technology})

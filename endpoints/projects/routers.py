@@ -43,7 +43,7 @@ def get_a_project_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['projects'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Project with id {id} does not exist!")    
     
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
@@ -62,7 +62,7 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['projects'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Project with id {id} does not exist!")    
     
     updatedProject = project.dict()
@@ -83,7 +83,7 @@ def delete_a_project_by_id(id: str, request: Request):
         raise HTTPException(404, f"id {id} is invalid")
 
     # check if valid ObjectId exists!
-    if request.app.db['projects'].find({"_id": ObjectId(id)}, {"$exists": False}):
+    if request.app.db['projects'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Project with id {id} does not exist!")
 
     deletedProject = request.app.db["projects"].delete_one({"_id": ObjectId(id)})
