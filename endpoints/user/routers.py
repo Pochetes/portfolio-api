@@ -12,6 +12,7 @@ router = APIRouter(prefix='/user')
 
 # ================== START /user endpoint ==================
 
+
 # GET all users (should only be me)
 @router.get('', response_model=User)
 def get_all_users(request: Request):
@@ -24,9 +25,10 @@ def get_all_users(request: Request):
 
     raise HTTPException(404, "user does not exist!")
 
+
 # CREATE a new user (should only be done once)
 @router.post('', response_model=User)
-def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
+def create_a_new_user(user: User, request: Request):  # CAN ONLY BE DONE ONCE
     newUser = user.dict()
     request.app.db['user'].insert_one(newUser)
     # converts list object to str (JSON format)
@@ -34,9 +36,9 @@ def create_a_new_user(user: User, request: Request): # CAN ONLY BE DONE ONCE
     response = json.loads(json.dumps(newUser, default=json_util.default))
     if response is not None:
         return JSONResponse(response, 201)
-
     raise HTTPException(400, "Bad Request")
     
+
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
 def update_the_current_user(firstName: str, user: User, request: Request):

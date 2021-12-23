@@ -1,6 +1,7 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 
+
 # ========= /user Endpoint =========
 class User(BaseModel):
     firstName: str = Field(...)
@@ -20,6 +21,8 @@ class User(BaseModel):
                 "description": "A very nice guy indeed!"
             }
         }
+
+
 class UpdateUser(BaseModel):
     firstName: Optional[str]
     lastName: Optional[str]

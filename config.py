@@ -1,5 +1,6 @@
 from pydantic import BaseSettings
 
+
 # CHANGE
 class DatabaseSettings(BaseSettings):
     DB_NAME: str = "portfolio"
@@ -7,6 +8,7 @@ class DatabaseSettings(BaseSettings):
 
     class Config:
         orm_mode = True
+
 
 # CHANGE
 class MiddlewareSettings(BaseSettings):
@@ -30,15 +32,16 @@ class MiddlewareSettings(BaseSettings):
     class Config:
         orm_mode = True
 
+
 # CHANGE
 class MetadataSettings(BaseSettings):
     APP_NAME: str = "Roberto's Portfolio API"
     DEBUG_MODE: bool = True
     VERSION: str = "1.0.0"
     CONTACT: dict = {
-            "name": "Roberto Martinez",
-            "email": "robertomiguel2001@gmail.com"
-        }
+        "name": "Roberto Martinez",
+        "email": "robertomiguel2001@gmail.com"
+    }
     LICENSE: dict = {
         "name": "MIT",
         "url": "https://choosealicense.com/licenses/mit"
@@ -80,6 +83,7 @@ This will return my software related projects that I have worked on.
     class Config:
         orm_mode = True
 
+
 # container class for all settings
 class Settings(BaseSettings):
     db: DatabaseSettings
@@ -88,6 +92,7 @@ class Settings(BaseSettings):
 
     class Config:
         orm_mode: True
+
 
 settings = Settings(db=DatabaseSettings(),
                     md=MiddlewareSettings(),

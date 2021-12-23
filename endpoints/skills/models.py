@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 # ========= /skills Endpoint =========
 class Skill(BaseModel):
     technology: str = Field(...)
@@ -14,6 +15,8 @@ class Skill(BaseModel):
                 "image": "public/images/skills/<file_name>"
             }
         }
+
+
 class UpdateSkill(BaseModel):
     technology: Optional[str]
     image: Optional[str]

@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 # ========= /experience Endpoint =========
 class Experience(BaseModel):
     company: str = Field(...)
@@ -20,6 +21,7 @@ class Experience(BaseModel):
                 "image": "public/images/experiences/<file_name>"
             }
         }
+
 
 class UpdateExperience(BaseModel):
     company: Optional[str]

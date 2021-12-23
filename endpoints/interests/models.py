@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 # ========= /interests Endpoint =========
 class Interest(BaseModel):
     topic: str = Field(...)
@@ -14,6 +15,7 @@ class Interest(BaseModel):
                 "image": "public/images/interests/<file_name>"
             }
         }
+
 
 class UpdateInterest(BaseModel):
     topic: Optional[str]

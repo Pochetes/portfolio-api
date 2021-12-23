@@ -10,6 +10,7 @@ router = APIRouter(prefix='/experiences')
 
 # ================== START /experiences endpoint ==================
 
+
 # GET all experiences
 @router.get('', response_model=List[Experience])
 def get_all_experiences(request: Request):
@@ -22,6 +23,7 @@ def get_all_experiences(request: Request):
 
     raise HTTPException(404, "No experiences found!")
 
+
 # CREATE a new experience
 @router.post('', response_model=Experience)
 def create_a_new_experience(request: Request, experience: Experience = Body(...)):
@@ -32,8 +34,9 @@ def create_a_new_experience(request: Request, experience: Experience = Body(...)
     response = json.loads(json.dumps(newExperience, default=json_util.default))
     if response is not None:
         return JSONResponse(response, 201)
-    
+
     raise HTTPException(400, "Bad request")
+
 
 # GET an experience by id
 @router.get('/{id}', response_model=Experience)
@@ -45,7 +48,7 @@ def get_an_experience_by_id(id: str, request: Request):
     # check if valid ObjectId exists!
     if request.app.db['experiences'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Experience with id {id} does not exist!")
-        
+
     experience = request.app.db['experiences'].find_one({"_id": ObjectId(id)})
 
     response = json.loads(json.dumps(experience, default=json_util.default))
@@ -53,6 +56,7 @@ def get_an_experience_by_id(id: str, request: Request):
         return JSONResponse(response, 200)
 
     raise HTTPException(404, f"Experience with id {id} not found")
+
 
 # UPDATE an experience by id
 @router.put('/{id}', response_model=UpdateExperience)
@@ -64,16 +68,17 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
     # check if valid ObjectId exists!
     if request.app.db['experiences'].count_documents({"_id": ObjectId(id)}) == 0:
         raise HTTPException(404, f"Experience with id {id} does not exist!")
-    
+
     updatedExperience = experience.dict()
-    request.app.db['experiences'].update_one({"_id": ObjectId(id)}, { "$set": updatedExperience})
+    request.app.db['experiences'].update_one({"_id": ObjectId(id)}, {"$set": updatedExperience})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedExperience, default=json_util.default))
     if response is not None:
         return JSONResponse(response, 200)
-    
+
     raise HTTPException(404, f"Experience with id {id} does not exist!")
+
 
 # DELETE an experience by id
 @router.delete('/{id}', response_model=Experience)

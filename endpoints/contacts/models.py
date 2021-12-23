@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 # ========= /user/contacts Endpoint =========
 class Contact(BaseModel):
     title: str = Field(...)
@@ -16,6 +17,7 @@ class Contact(BaseModel):
                 "link": "https://www.github.com/Pochetes"
             }
         }
+
 
 class UpdateContact(BaseModel):
     title: Optional[str]

@@ -45,14 +45,17 @@ app.add_middleware(
     allow_headers=md.CORS_HEADERS
 )
 
+
 @app.on_event("startup")
 def startupDBClient():
     app.client = MongoClient(MONGODB_URI)
     app.db = app.client[db.DB_NAME]
 
+
 @app.on_event("shutdown")
 def shutdownDBClient():
     app.client.close()
+
 
 app.include_router(userRouter, tags=["user"])
 app.include_router(contactsRouter, tags=["contacts"])
@@ -66,3 +69,4 @@ if __name__ == "__main__":
         "main:app",
         reload=mt.DEBUG_MODE
     )
+    

@@ -10,6 +10,7 @@ router = APIRouter(prefix='/projects')
 
 # ================== START /projects endpoint ==================
 
+
 # GET all projects
 @router.get('', response_model=List[Project])
 def get_all_projects(request: Request):
@@ -21,6 +22,7 @@ def get_all_projects(request: Request):
         return JSONResponse(response, 200)
 
     raise HTTPException(404, "No projects found!")
+
 
 # CREATE a new project
 @router.post('', response_model=Project)
@@ -35,6 +37,7 @@ def create_a_new_project(request: Request, project: Project = Body(...)):
 
     raise HTTPException(400, "Bad request")
 
+
 # GET a project by id
 @router.get('/{id}', response_model=Project)
 def get_a_project_by_id(id: str, request: Request):
@@ -44,15 +47,15 @@ def get_a_project_by_id(id: str, request: Request):
 
     # check if valid ObjectId exists!
     if request.app.db['projects'].count_documents({"_id": ObjectId(id)}) == 0:
-        raise HTTPException(404, f"Project with id {id} does not exist!")    
-    
+        raise HTTPException(404, f"Project with id {id} does not exist!")
+
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
     
     if response is not None:
         return JSONResponse(response, 200)
-
     raise HTTPException(404, f"project with id {id} not found")
+
 
 # UPDATE a project by id
 @router.put('/{id}', response_model=UpdateProject)
@@ -63,10 +66,10 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
 
     # check if valid ObjectId exists!
     if request.app.db['projects'].count_documents({"_id": ObjectId(id)}) == 0:
-        raise HTTPException(404, f"Project with id {id} does not exist!")    
-    
+        raise HTTPException(404, f"Project with id {id} does not exist!")
+
     updatedProject = project.dict()
-    request.app.db['projects'].update_one({"_id": ObjectId(id)}, { "$set": updatedProject})
+    request.app.db['projects'].update_one({"_id": ObjectId(id)}, {"$set": updatedProject})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedProject, default=json_util.default))
@@ -74,6 +77,7 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
         return JSONResponse(response, 200)
 
     raise HTTPException(404, f"project with id {id} does not exist!")
+
 
 # DELETE a project by id
 @router.delete('/{id}', response_model=Project)

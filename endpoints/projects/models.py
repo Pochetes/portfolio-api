@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
+
 # ========= /projects Endpoint =========
 class Project(BaseModel):
     title: str = Field(...)
@@ -18,6 +19,7 @@ class Project(BaseModel):
                 "link": "https://www.Github.com/..."
             }
         }
+
 
 class UpdateProject(BaseModel):
     title: Optional[str]

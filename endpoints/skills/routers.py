@@ -11,6 +11,7 @@ router = APIRouter(prefix='/skills')
 
 # ================== START /skills endpoint ==================
 
+
 # GET all skills (i.e Python, C, JavaScript)
 @router.get('', response_model=List[Skill])
 def get_all_skills(request: Request):
@@ -22,6 +23,7 @@ def get_all_skills(request: Request):
         return JSONResponse(response, 200)
 
     raise HTTPException(404, "No skills found!")
+
 
 # CREATE a new skill
 @router.post('', response_model=Skill)
@@ -35,6 +37,7 @@ def create_a_new_skill(skill: Skill, request: Request):
         return JSONResponse(response, 201)
 
     raise HTTPException(400, "Bad request")
+
 
 # GET a skill by skill type
 @router.get('/{technology}', response_model=Skill)
@@ -51,6 +54,7 @@ def get_a_skill_by_technology(technology: str, request: Request):
 
     raise HTTPException(404, f"{technology} skill not found")
 
+
 # UPDATE a skill by skill type
 @router.put('/{technology}', response_model=UpdateSkill)
 def update_a_skill_by_technology(technology: str, skill: Skill, request: Request):
@@ -59,7 +63,7 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
         raise HTTPException(404, f"{technology} skill does not exist!")
 
     updatedSkill = skill.dict()
-    request.app.db['skills'].update_one({"technology": technology}, { "$set": updatedSkill})
+    request.app.db['skills'].update_one({"technology": technology}, {"$set": updatedSkill})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedSkill, default=json_util.default))
@@ -67,6 +71,7 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
         return JSONResponse(response, 200)
 
     raise HTTPException(404, "Person does not exist!")
+
 
 # DELETE a skill by skill type
 @router.delete('/{technology}', response_model=Skill)

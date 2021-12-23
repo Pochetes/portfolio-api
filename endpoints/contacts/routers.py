@@ -10,6 +10,7 @@ router = APIRouter(prefix='/contacts')
 
 # ================== START /contacts endpoint ==================
 
+
 # GET all contacts (i.e. LinkedIn, Twitter, Github)
 @router.get('', response_model=List[Contact])
 def get_all_contacts(request: Request):
@@ -19,8 +20,8 @@ def get_all_contacts(request: Request):
     response = json.loads(json.dumps(contacts, default=json_util.default))
     if response is not None:
         return JSONResponse(response, 200)
-    
     raise HTTPException(404, "No contacts found!")
+
 
 # CREATE a new contact
 @router.post('', response_model=Contact)
@@ -31,9 +32,9 @@ def create_a_new_contact(contact: Contact, request: Request):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newContact, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 201)
-    
+        return JSONResponse(response, 201)    
     raise HTTPException(400, "Bad request")
+
 
 # GET a contact by title
 @router.get('/{title}', response_model=Contact)
@@ -50,6 +51,7 @@ def get_a_contact_by_title(title: str, request: Request):
 
     raise HTTPException(404, f"Contact from {title} not found")
 
+
 # UPDATE a contact by title
 @router.put('/{title}', response_model=UpdateContact)
 def update_a_contact_by_title(title: str, contact: Contact, request: Request):
@@ -58,22 +60,21 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
         raise HTTPException(404, f"Contact from {title} does not exist!")
 
     updatedContact = contact.dict()
-    request.app.db['contacts'].update_one({"title": title}, { "$set": updatedContact})
+    request.app.db['contacts'].update_one({"title": title}, {"$set": updatedContact})
     # converts list object to str (JSON format)
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedContact, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)
-        
+        return JSONResponse(response, 200)   
     raise HTTPException(404, f"Contact from {title} does not exist!")
+
 
 # DELETE a contact by title
 @router.delete('/{title}', response_model=Contact)
 def delete_a_contact_by_title(title: str, request: Request):
     # checks if title exists in MongoDB db
     if request.app.db['contacts'].count_documents({"title": title}) == 0:
-        raise HTTPException(404, f"Contact from {title} does not exist!")    
-    
+        raise HTTPException(404, f"Contact from {title} does not exist!")
     deletedContact = request.app.db["contacts"].delete_one({"title": title})
 
     if deletedContact.deleted_count == 1:
