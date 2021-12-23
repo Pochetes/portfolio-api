@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Literal, Optional
 
 
 # ========= /user/contacts Endpoint =========
@@ -9,7 +9,7 @@ class Contact(BaseModel):
     link: str = Field(...)
 
     class Config:
-        allow_population_by_field_name: True
+        allow_population_by_field_name: Literal[True]
         schema_extra = {
             "example": {
                 "title": "Github",

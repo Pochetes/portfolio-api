@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from functools import lru_cache
-from setup import settings
+from config import settings
 
 # endpoint methods
 from endpoints.user.routers import router as userRouter

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr, Field
-from typing import Optional
+from typing import Literal, Optional
 
 
 # ========= /user Endpoint =========
@@ -11,7 +11,7 @@ class User(BaseModel):
     description: str = Field(...)
 
     class Config:
-        allow_population_by_field_name: True
+        allow_population_by_field_name: Literal[True]
         schema_extra = {
             "example": {
                 "firstName": "John",

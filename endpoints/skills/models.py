@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Literal
 
 
 # ========= /skills Endpoint =========
@@ -8,7 +8,7 @@ class Skill(BaseModel):
     image: str = Field(...)
 
     class Config:
-        allow_population_by_field_name: True
+        allow_population_by_field_name: Literal[True]
         schema_extra = {
             "example": {
                 "technology": "Python",

@@ -1,3 +1,4 @@
+from typing import Literal
 from pydantic import BaseSettings
 
 
@@ -91,7 +92,7 @@ class Settings(BaseSettings):
     mt: MetadataSettings
 
     class Config:
-        orm_mode: True
+        orm_mode: Literal[True]
 
 
 settings = Settings(db=DatabaseSettings(),
