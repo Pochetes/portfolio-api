@@ -1,18 +1,20 @@
-import os, uvicorn
+import os
+from functools import lru_cache
+
+import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
-from dotenv import load_dotenv
-from functools import lru_cache
-from config import settings
 
-# endpoint methods
-from endpoints.user.routers import router as userRouter
+from config import settings
 from endpoints.contacts.routers import router as contactsRouter
-from endpoints.skills.routers import router as skillsRouter
 from endpoints.experiences.routers import router as experiencesRouter
 from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
+from endpoints.skills.routers import router as skillsRouter
+# endpoint methods
+from endpoints.user.routers import router as userRouter
 
 
 @lru_cache  # caches the execution of settings for optimization

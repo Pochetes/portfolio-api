@@ -1,11 +1,12 @@
 import json
+from typing import List
+
+from bson import json_util
 from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
-from .models import Skill, UpdateSkill
-from typing import List
-from bson import json_util
 
+from .models import Skill, UpdateSkill
 
 router = APIRouter(prefix='/skills')
 

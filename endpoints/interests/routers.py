@@ -1,10 +1,12 @@
 import json
-from fastapi import APIRouter, Request, Body
+from typing import List
+
+from bson import ObjectId, json_util
+from fastapi import APIRouter, Body, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
+
 from .models import Interest, UpdateInterest
-from typing import List
-from bson import json_util, ObjectId
 
 router = APIRouter(prefix='/interests')
 

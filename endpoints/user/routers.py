@@ -1,9 +1,11 @@
 import json
+
+from bson import json_util
 from fastapi import APIRouter, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
-from .models import User, UpdateUser
-from bson import json_util
+
+from .models import UpdateUser, User
 
 router = APIRouter(prefix='/user')
 
