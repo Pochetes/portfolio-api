@@ -51,7 +51,7 @@ def get_a_project_by_id(id: str, request: Request):
 
     project = request.app.db['projects'].find_one({"_id": ObjectId(id)})
     response = json.loads(json.dumps(project, default=json_util.default))
-    
+
     if response is not None:
         return JSONResponse(response, 200)
     raise HTTPException(404, f"project with id {id} not found")

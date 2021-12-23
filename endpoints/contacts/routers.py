@@ -32,7 +32,7 @@ def create_a_new_contact(contact: Contact, request: Request):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(newContact, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 201)    
+        return JSONResponse(response, 201)
     raise HTTPException(400, "Bad request")
 
 
@@ -65,7 +65,7 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
     # converts str obj to JSON type (avoids escape double quotes)
     response = json.loads(json.dumps(updatedContact, default=json_util.default))
     if response is not None:
-        return JSONResponse(response, 200)   
+        return JSONResponse(response, 200)
     raise HTTPException(404, f"Contact from {title} does not exist!")
 
 

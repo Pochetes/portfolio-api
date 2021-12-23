@@ -14,9 +14,11 @@ from endpoints.experiences.routers import router as experiencesRouter
 from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
 
-@lru_cache # caches the execution of settings for optimization
+
+@lru_cache  # caches the execution of settings for optimization
 def getSettings():
     return settings
+
 
 # naming settings for each class
 db = getSettings().db
@@ -69,4 +71,3 @@ if __name__ == "__main__":
         "main:app",
         reload=mt.DEBUG_MODE
     )
-    
