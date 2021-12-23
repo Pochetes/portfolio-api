@@ -37,7 +37,7 @@ def create_a_new_user(user: User, request: Request):  # CAN ONLY BE DONE ONCE
     if response is not None:
         return JSONResponse(response, 201)
     raise HTTPException(400, "Bad Request")
- 
+
 
 # UPDATE the current user (should only be description)
 @router.put('', response_model=UpdateUser)
