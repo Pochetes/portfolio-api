@@ -13,7 +13,6 @@ from endpoints.experiences.routers import router as experiencesRouter
 from endpoints.interests.routers import router as interestsRouter
 from endpoints.projects.routers import router as projectsRouter
 from endpoints.skills.routers import router as skillsRouter
-# endpoint methods
 from endpoints.user.routers import router as userRouter
 
 
