@@ -110,10 +110,10 @@ This API provides many features that make it lighting-fast:
 - Modularized Application
 - MongoDB CRUD Operations
 - Error & Exception Handling
+- Pylint & API Testing
+- Built under Docker environment OS **(SOON!)**
 - Authentication **(SOON!)**
 - Deployed On Heroku **(SOON!)**
-- Built under Docker environment OS **(SOON!)**
-- Pylint & API Testing **(SOON!)**
 
 ## Endpoints
 
