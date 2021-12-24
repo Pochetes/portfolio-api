@@ -29,6 +29,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
+    - name: Start MongoDB ${{ matrix.mongodb-version }}
+      uses: supercharge/mongodb-github-action@1.7.0
+      with:
+        mongodb-version: ${{ matrix.mongodb-version }}
+
     # Setting Up Python
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
