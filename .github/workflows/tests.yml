@@ -38,7 +38,9 @@ jobs:
     # Setting up Python Dependencies    
     - name: Install Python dependencies
       run: |
+        sudo apt-get install gcc python-dev libkrb5-dev
         python -m pip install --upgrade pip
+        pip install pywinrm[kerberos]
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     # Setting up Newman Dependency
