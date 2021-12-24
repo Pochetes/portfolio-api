@@ -45,6 +45,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install https://github.com/sbidoul/pip/archive/wheel-absent-warning-sbi.zip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     # Setting up Newman Dependency
