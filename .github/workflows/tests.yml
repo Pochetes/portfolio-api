@@ -50,13 +50,13 @@ jobs:
 
     # Setting up Newman Dependency
     - name: Install Newman dependency
-      run: npm install --prefix tests/postman/
+      run: npm install -g newman
 
     # Running the API
     - name: Run the API and Postman's tests
       run: |
         python main.py &
         sleep 2
-        ./node_modules/newman/bin/newman.js run api-tests.json
+        newman run api-tests.json
         kill -9 `lsof -i:8000 -t`
         
