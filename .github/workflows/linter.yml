@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Pylinter - uses flake8, mypy and isort to improve Python syntax
+name: CI - Pylinter Program
 
 # Controls when the workflow will run
 on:

@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "27f26cd3-6618-44f8-9eab-737a37aad62e",
+		"name": "Roberto's Portfolio API",
+		"description": "\nThis is an API that retrieves information about Roberto Martinez's personal and work life. 🚀\n\nFor now, we have 5 broad endpoints that describe everything there is to know. However, some of the\nendpoint methods will be unavailable to users as they are authenticated for my use only.\n\n### User 👨🏼\n\nYou will be able to see my:\n* name.\n* email.\n* brief description.\n\n### Contacts 📲\n\nHere will be my **social media** links.\n\n### Skills 🌟\n\nThis section holds the **technical** skills that I possess.\n\n### Experiences 📈\n\nHere will be the experiences that I've had throughout my journey pursuing **Software Engineering**.\n\n### Interests 🤔\n\nThis will retrieve my interests **in** and **outside** the technology world.\n\n### Projects 💡\n\nThis will return my software related projects that I have worked on.\n\n\nContact Support:\n Name: Roberto Martinez\n Email: robertomiguel2001@gmail.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/user",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"firstName\": \"<string>\",\n\t\"lastName\": \"<string>\",\n\t\"email\": \"<email>\",\n\t\"image\": \"<string>\",\n\t\"description\": \"<string>\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "contacts",
+			"item": [
+				{
+					"name": "Get All Contacts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/contacts",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"contacts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/contacts",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"contacts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n\t\t\"title\": \"<string>\",\n\t\t\"image\": \"<string>\",\n\t\t\"link\": \"<string>\"\n\t},\n\t{\n\t\t\"title\": \"<string>\",\n\t\t\"image\": \"<string>\",\n\t\t\"link\": \"<string>\"\n\t}\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "skills",
+			"item": [
+				{
+					"name": "Get All Skills",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/skills",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"skills"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/skills",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"skills"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n\t\t\"technology\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t},\n\t{\n\t\t\"technology\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t}\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "experiences",
+			"item": [
+				{
+					"name": "Get All Experiences",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/experiences",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"experiences"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/experiences",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"experiences"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n\t\t\"company\": \"<string>\",\n\t\t\"position\": \"<string>\",\n\t\t\"dateStarted\": \"<string>\",\n\t\t\"dateEnded\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t},\n\t{\n\t\t\"company\": \"<string>\",\n\t\t\"position\": \"<string>\",\n\t\t\"dateStarted\": \"<string>\",\n\t\t\"dateEnded\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t}\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "interests",
+			"item": [
+				{
+					"name": "Get All Interests",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/interests",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"interests"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/interests",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"interests"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n\t\t\"topic\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t},\n\t{\n\t\t\"topic\": \"<string>\",\n\t\t\"image\": \"<string>\"\n\t}\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "projects",
+			"item": [
+				{
+					"name": "Get All Projects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response ran successfully\", () => {",
+									"    pm.response.to.have.status(200)  ",
+									"    pm.response.to.be.success",
+									"    pm.response.to.be.ok",
+									"})",
+									"",
+									"pm.test(\"Content-Type is application/json\", () => {",
+									"    pm.response.to.be.header(\"Content-Type\", \"application/json\")",
+									"})",
+									"",
+									"pm.test(\"Response time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500)",
+									"})",
+									"",
+									"pm.test(\"Body returned\", () => {",
+									"    pm.expect(pm.response.text()).to.not.be.empty",
+									"    pm.response.to.not.have.jsonBody(\"error\")",
+									"    pm.response.to.be.withBody",
+									"    pm.response.to.be.json",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/projects",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/projects",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n\t{\n\t\t\"title\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"image\": \"<string>\",\n\t\t\"link\": \"<string>\"\n\t},\n\t{\n\t\t\"title\": \"<string>\",\n\t\t\"description\": \"<string>\",\n\t\t\"image\": \"<string>\",\n\t\t\"link\": \"<string>\"\n\t}\n]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000"
+		}
+	]
+}
