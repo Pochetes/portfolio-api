@@ -8,11 +8,7 @@ from .utils import VerifyToken
 tokenAuthScheme = HTTPBearer()
 
 
-class token():
-    credentials: str
-
-
-def has_access(token: str = Depends(tokenAuthScheme)):
+def has_access(token: str = Depends(tokenAuthScheme)) -> str:
 
     result = VerifyToken(token.credentials).verify()
 
