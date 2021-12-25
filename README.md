@@ -24,11 +24,15 @@ The api returns JSON responses in the `applications/json` format. It has a total
 │   ├── main.cpython-39.pyc
 │   ├── models.cpython-39.pyc
 │   └── setup.cpython-39.pyc
+├── api-tests.json
 ├── config.py
 ├── endpoints
 │   ├── __init__.py
 │   ├── __pycache__
-│   │   └── __init__.cpython-39.pyc
+│   │   ├── __init__.cpython-39.pyc
+│   │   ├── auth.cpython-39.pyc
+│   │   └── utils.cpython-39.pyc
+│   ├── auth.py
 │   ├── contacts
 │   │   ├── README.md
 │   │   ├── __init__.py
@@ -74,15 +78,16 @@ The api returns JSON responses in the `applications/json` format. It has a total
 │   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
-│   └── user
-│       ├── README.md
-│       ├── __init__.py
-│       ├── __pycache__
-│       │   ├── __init__.cpython-39.pyc
-│       │   ├── models.cpython-39.pyc
-│       │   └── routers.cpython-39.pyc
-│       ├── models.py
-│       └── routers.py
+│   ├── user
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   └── utils.py
 ├── main.py
 ├── media
 │   ├── GETmethod.gif
@@ -90,7 +95,7 @@ The api returns JSON responses in the `applications/json` format. It has a total
 │   └── Params.gif
 └── requirements.txt
 
-16 directories, 57 files
+16 directories, 62 files
 ```
 
 ### Technologies Used
@@ -111,8 +116,8 @@ This API provides many features that make it lighting-fast:
 - MongoDB CRUD Operations
 - Error & Exception Handling
 - Pylint & API Testing
+- Auth0 Authentication & Security
 - Built under Docker environment OS **(SOON!)**
-- Authentication **(SOON!)**
 - Deployed On Heroku **(SOON!)**
 
 ## Endpoints
@@ -177,6 +182,10 @@ The `POST` method allows you to create a new data entry for a specific resource.
 A method that has a path parameter usually requires some sort of input to find, update, delete a specific resource. In this example, we are finding a single project by an `id` path parameter. To do this, copy the parameter from the first `GET` method and use it as the current path parameter, like so:
 
 ![Params](media/Params.gif)
+
+## Authentication
+
+The `POST`, `PUT`, and `DELETE` endpoints are protected using 0Auth authentication. I am the only person that's able to make those changes (unless you were able to get my access token, that is) and authenticate the endpoints. It is secured through a JWT-formatted access token. After some time, a new token is generated, making it difficult for hackers to access these data points. The hashing algorithm used is **RS256**, or RSA Signature with SHA-256.
 
 ## Configuration
 
