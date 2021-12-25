@@ -2,11 +2,12 @@ import json
 from typing import List
 
 from bson import json_util
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 from .models import Skill, UpdateSkill
+from ..auth import has_access
 
 router = APIRouter(prefix='/skills')
 
@@ -27,7 +28,7 @@ def get_all_skills(request: Request):
 
 
 # CREATE a new skill
-@router.post('', response_model=Skill)
+@router.post('', response_model=Skill, dependencies=[Depends(has_access)])
 def create_a_new_skill(skill: Skill, request: Request):
     newSkill = skill.dict()
     request.app.db['skills'].insert_one(newSkill)
@@ -57,7 +58,7 @@ def get_a_skill_by_technology(technology: str, request: Request):
 
 
 # UPDATE a skill by skill type
-@router.put('/{technology}', response_model=UpdateSkill)
+@router.put('/{technology}', response_model=UpdateSkill, dependencies=[Depends(has_access)])
 def update_a_skill_by_technology(technology: str, skill: Skill, request: Request):
     # check if technology exists in MongoDB db
     if request.app.db['skills'].count_documents({"technology": technology}) == 0:
@@ -75,7 +76,7 @@ def update_a_skill_by_technology(technology: str, skill: Skill, request: Request
 
 
 # DELETE a skill by skill type
-@router.delete('/{technology}', response_model=Skill)
+@router.delete('/{technology}', response_model=Skill, dependencies=[Depends(has_access)])
 def delete_a_skill_by_technology(technology: str, request: Request):
     # check if technology exists in MongoDB db
     if request.app.db['skills'].count_documents({"technology": technology}) == 0:

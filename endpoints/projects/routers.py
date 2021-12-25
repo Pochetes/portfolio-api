@@ -2,11 +2,12 @@ import json
 from typing import List
 
 from bson import ObjectId, json_util
-from fastapi import APIRouter, Body, Request
+from fastapi import APIRouter, Body, Request, Depends
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 from .models import Project, UpdateProject
+from ..auth import has_access
 
 router = APIRouter(prefix='/projects')
 
@@ -27,7 +28,7 @@ def get_all_projects(request: Request):
 
 
 # CREATE a new project
-@router.post('', response_model=Project)
+@router.post('', response_model=Project, dependencies=[Depends(has_access)])
 def create_a_new_project(request: Request, project: Project = Body(...)):
     newProject = project.dict()
     request.app.db['projects'].insert_one(newProject)
@@ -60,7 +61,7 @@ def get_a_project_by_id(id: str, request: Request):
 
 
 # UPDATE a project by id
-@router.put('/{id}', response_model=UpdateProject)
+@router.put('/{id}', response_model=UpdateProject, dependencies=[Depends(has_access)])
 def update_a_project_by_id(id: str, request: Request, project: UpdateProject = Body(...)):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):
@@ -82,7 +83,7 @@ def update_a_project_by_id(id: str, request: Request, project: UpdateProject = B
 
 
 # DELETE a project by id
-@router.delete('/{id}', response_model=Project)
+@router.delete('/{id}', response_model=Project, dependencies=[Depends(has_access)])
 def delete_a_project_by_id(id: str, request: Request):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):

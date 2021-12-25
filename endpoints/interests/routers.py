@@ -2,11 +2,12 @@ import json
 from typing import List
 
 from bson import ObjectId, json_util
-from fastapi import APIRouter, Body, Request
+from fastapi import APIRouter, Body, Request, Depends
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 from .models import Interest, UpdateInterest
+from ..auth import has_access
 
 router = APIRouter(prefix='/interests')
 
@@ -27,7 +28,7 @@ def get_all_interests(request: Request):
 
 
 # CREATE a new interest
-@router.post('', response_model=Interest)
+@router.post('', response_model=Interest, dependencies=[Depends(has_access)])
 def create_a_new_interest(request: Request, interest: Interest = Body(...)):
     newinterest = interest.dict()
     request.app.db['interests'].insert_one(newinterest)
@@ -61,7 +62,7 @@ def get_an_interest_by_id(id: str, request: Request):
 
 
 # UPDATE an interest by id
-@router.put('/{id}', response_model=UpdateInterest)
+@router.put('/{id}', response_model=UpdateInterest, dependencies=[Depends(has_access)])
 def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest = Body(...)):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):
@@ -83,7 +84,7 @@ def update_an_interest_by_id(id: str, request: Request, interest: UpdateInterest
 
 
 # DELETE an interest by id
-@router.delete('/{id}', response_model=Interest)
+@router.delete('/{id}', response_model=Interest, dependencies=[Depends(has_access)])
 def delete_an_interest_by_id(id: str, request: Request):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):

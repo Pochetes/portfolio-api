@@ -2,11 +2,12 @@ import json
 from typing import List
 
 from bson import json_util
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 from .models import Contact, UpdateContact
+from ..auth import has_access
 
 router = APIRouter(prefix='/contacts')
 
@@ -26,7 +27,7 @@ def get_all_contacts(request: Request):
 
 
 # CREATE a new contact
-@router.post('', response_model=Contact)
+@router.post('', response_model=Contact, dependencies=[Depends(has_access)])
 def create_a_new_contact(contact: Contact, request: Request):
     newContact = contact.dict()
     request.app.db['contacts'].insert_one(newContact)
@@ -55,7 +56,7 @@ def get_a_contact_by_title(title: str, request: Request):
 
 
 # UPDATE a contact by title
-@router.put('/{title}', response_model=UpdateContact)
+@router.put('/{title}', response_model=UpdateContact, dependencies=[Depends(has_access)])
 def update_a_contact_by_title(title: str, contact: Contact, request: Request):
     # checks if title exists in MongoDB db
     if request.app.db['contacts'].count_documents({"title": title}) == 0:
@@ -72,7 +73,7 @@ def update_a_contact_by_title(title: str, contact: Contact, request: Request):
 
 
 # DELETE a contact by title
-@router.delete('/{title}', response_model=Contact)
+@router.delete('/{title}', response_model=Contact, dependencies=[Depends(has_access)])
 def delete_a_contact_by_title(title: str, request: Request):
     # checks if title exists in MongoDB db
     if request.app.db['contacts'].count_documents({"title": title}) == 0:

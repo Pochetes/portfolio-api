@@ -2,11 +2,12 @@ import json
 from typing import List
 
 from bson import ObjectId, json_util
-from fastapi import APIRouter, Body, Request
+from fastapi import APIRouter, Body, Request, Depends
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 from .models import Experience, UpdateExperience
+from ..auth import has_access
 
 router = APIRouter(prefix='/experiences')
 
@@ -27,7 +28,7 @@ def get_all_experiences(request: Request):
 
 
 # CREATE a new experience
-@router.post('', response_model=Experience)
+@router.post('', response_model=Experience, dependencies=[Depends(has_access)])
 def create_a_new_experience(request: Request, experience: Experience = Body(...)):
     newExperience = experience.dict()
     request.app.db['experiences'].insert_one(newExperience)
@@ -61,7 +62,7 @@ def get_an_experience_by_id(id: str, request: Request):
 
 
 # UPDATE an experience by id
-@router.put('/{id}', response_model=UpdateExperience)
+@router.put('/{id}', response_model=UpdateExperience, dependencies=[Depends(has_access)])
 def update_an_experience_by_id(id: str, request: Request, experience: UpdateExperience = Body(...)):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):
@@ -83,7 +84,7 @@ def update_an_experience_by_id(id: str, request: Request, experience: UpdateExpe
 
 
 # DELETE an experience by id
-@router.delete('/{id}', response_model=Experience)
+@router.delete('/{id}', response_model=Experience, dependencies=[Depends(has_access)])
 def delete_an_experience_by_id(id: str, request: Request):
     # check if valid ObjectId
     if not ObjectId.is_valid(id):
