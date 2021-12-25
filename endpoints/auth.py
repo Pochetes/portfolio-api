@@ -8,7 +8,7 @@ from .utils import VerifyToken
 tokenAuthScheme = HTTPBearer()
 
 
-class token:
+class token():
     credentials: str
 
 
