@@ -1,5 +1,7 @@
-import os, jwt
+import os
 from configparser import ConfigParser
+
+import jwt
 
 
 def set_up():

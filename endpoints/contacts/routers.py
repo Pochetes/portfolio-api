@@ -2,12 +2,12 @@ import json
 from typing import List
 
 from bson import json_util
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
-from .models import Contact, UpdateContact
 from ..auth import has_access
+from .models import Contact, UpdateContact
 
 router = APIRouter(prefix='/contacts')
 
