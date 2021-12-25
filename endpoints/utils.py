@@ -46,7 +46,7 @@ class VerifyToken():
         except jwt.exceptions.DecodeError as error:
             return {"status": "error", "msg": error.__str__()}
 
-        try: 
+        try:
             payload = jwt.decode(
                 self.token,
                 self.signing_key,
