@@ -7,8 +7,10 @@ from .utils import VerifyToken
 # Scheme for the Authorization header
 tokenAuthScheme = HTTPBearer()
 
+
 class token:
     credentials: str
+
 
 def has_access(token: str = Depends(tokenAuthScheme)):
 
