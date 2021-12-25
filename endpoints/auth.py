@@ -8,9 +8,9 @@ from .utils import VerifyToken
 tokenAuthScheme = HTTPBearer()
 
 
-def has_access(token: str = Depends(tokenAuthScheme)) -> str:
+def has_access(token: str = Depends(tokenAuthScheme)):
 
-    result = VerifyToken(token.credentials).verify()
+    result = VerifyToken(token).verify()
 
     if result.get("status"):
         # response.status_code = status.HTTP_400_BAD_REQUEST

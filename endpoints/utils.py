@@ -25,7 +25,7 @@ class VerifyToken():
     """Does all the token verification using PyJWT"""
 
     def __init__(self, token, permissions=None, scopes=None):
-        self.token = token
+        self.token = token.credentials
         self.permissions = permissions
         self.scopes = scopes
         self.config = set_up()
