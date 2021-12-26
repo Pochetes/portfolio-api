@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
+from uvicorn.config import LOG_LEVELS
 
 from config import settings
 from endpoints.contacts.routers import router as contactsRouter
@@ -25,6 +26,7 @@ def getSettings():
 db = getSettings().db
 md = getSettings().md
 mt = getSettings().mt
+srv = getSettings().srv
 
 # loading env variable that holds MongoDB connection
 load_dotenv()
@@ -70,5 +72,8 @@ app.include_router(projectsRouter, tags=['projects'])
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",
-        reload=mt.DEBUG_MODE
+        reload=mt.DEBUG_MODE,
+        host=srv.HOST,
+        port=srv.PORT,
+        log_level=srv.LOG_LEVEL
     )

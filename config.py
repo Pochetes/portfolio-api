@@ -4,6 +4,16 @@ from pydantic import BaseSettings
 
 
 # CHANGE
+class ServerSettings(BaseSettings):
+    HOST: str = "127.0.0.1"
+    PORT: int = 8001
+    LOG_LEVEL: str = "info"
+
+    class Config:
+        orm_mode = True
+
+
+# CHANGE
 class DatabaseSettings(BaseSettings):
     DB_NAME: str = "portfolio"
     DB_URI: str = "MONGODB_URI"
@@ -91,6 +101,7 @@ class Settings(BaseSettings):
     db: DatabaseSettings
     md: MiddlewareSettings
     mt: MetadataSettings
+    srv: ServerSettings
 
     class Config:
         orm_mode: Literal[True]
@@ -98,4 +109,5 @@ class Settings(BaseSettings):
 
 settings = Settings(db=DatabaseSettings(),
                     md=MiddlewareSettings(),
-                    mt=MetadataSettings())
+                    mt=MetadataSettings(),
+                    srv=ServerSettings())
