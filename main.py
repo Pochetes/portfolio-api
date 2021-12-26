@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
-from uvicorn.config import LOG_LEVELS
 
 from config import settings
 from endpoints.contacts.routers import router as contactsRouter
