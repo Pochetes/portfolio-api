@@ -11,11 +11,12 @@ The Roberto's Portfolio API is meant to retrieve data about my college life, car
 
 ## Description
 
-The api returns JSON responses in the `applications/json` format. It has a total of 6 endpoints that return specific data about me. More will be exaplined below.
+The api returns JSON responses in the `applications/json` format. It has a total of 6 endpoints that return specific data about me. More will be explained below.
 
 ### File Structure
 ```
 .
+├── Dockerfile
 ├── LICENSE
 ├── README.md
 ├── __pycache__
@@ -95,7 +96,7 @@ The api returns JSON responses in the `applications/json` format. It has a total
 │   └── Params.gif
 └── requirements.txt
 
-16 directories, 62 files
+16 directories, 63 files
 ```
 
 ### Technologies Used
@@ -117,7 +118,7 @@ This API provides many features that make it lighting-fast:
 - Error & Exception Handling
 - Pylint & API Testing
 - Auth0 Authentication & Security
-- Built under Docker environment OS **(SOON!)**
+- Built under Docker environment OS
 - Deployed On Heroku **(SOON!)**
 
 ## Endpoints
@@ -244,6 +245,21 @@ To run the server, run:
 ```
 python main.py
 ```
+
+### Creating a Docker Container
+
+First, build the docker image as provided in the `Dockerfile` using this command:
+```
+docker build -t portfolio-api-image .
+```
+Afterwards, make a new container using the `docker run` command:
+```
+docker run -d \
+--name portfolio-api-container \
+-p 8080:8080 \
+<docker_image_id>
+```
+Now you will be able to access the containerized application on your local machine!
 
 ## License
 
