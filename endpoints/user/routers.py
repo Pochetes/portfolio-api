@@ -1,12 +1,12 @@
 import json
 
 from bson import json_util
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
-from .models import UpdateUser, User
 from ..auth import has_access
+from .models import UpdateUser, User
 
 router = APIRouter(prefix='/user')
 
