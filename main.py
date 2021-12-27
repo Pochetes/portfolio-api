@@ -31,7 +31,6 @@ srv = getSettings().srv
 # loading env variable that holds MongoDB connection
 load_dotenv()
 MONGODB_URI = os.environ[db.DB_URI]
-currEnv = os.environ["ENVIRONMENT"]
 
 # instantiation of FastAPI app w/ configuration
 app = FastAPI(
