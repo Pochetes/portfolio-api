@@ -68,6 +68,7 @@ def shutdownDBClient():
 def root():
     return RedirectResponse("/docs")
 
+
 app.include_router(userRouter, tags=["user"])
 app.include_router(contactsRouter, tags=["contacts"])
 app.include_router(skillsRouter, tags=['skills'])
