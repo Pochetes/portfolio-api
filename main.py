@@ -4,8 +4,8 @@ from functools import lru_cache
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from pymongo import MongoClient
 
 from config import settings
