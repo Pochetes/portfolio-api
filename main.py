@@ -4,6 +4,7 @@ from functools import lru_cache
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 
@@ -30,6 +31,7 @@ srv = getSettings().srv
 # loading env variable that holds MongoDB connection
 load_dotenv()
 MONGODB_URI = os.environ[db.DB_URI]
+currEnv = os.environ["ENVIRONMENT"]
 
 # instantiation of FastAPI app w/ configuration
 app = FastAPI(
@@ -60,6 +62,11 @@ def startupDBClient():
 def shutdownDBClient():
     app.client.close()
 
+
+# redirects root URL to docs
+@app.get("/")
+def root():
+    return RedirectResponse("/docs")
 
 app.include_router(userRouter, tags=["user"])
 app.include_router(contactsRouter, tags=["contacts"])
