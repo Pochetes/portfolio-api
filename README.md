@@ -1,11 +1,11 @@
 # Roberto's Portfolio API
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
-![Code Size](https://img.shields.io/github/languages/code-size/Pochetes/portfolio-api?style=for-the-badge)
-![Lines of code](https://img.shields.io/tokei/lines/github/pochetes/portfolio-api?style=for-the-badge)
-![Website](https://img.shields.io/website?down_color=red&down_message=offline&style=for-the-badge&up_color=green&up_message=online&url=https%3A%2F%2Frobertos-api.herokuapp.com%2Fdocs)
-![Open Issues](https://img.shields.io/github/issues-raw/Pochetes/portfolio-api?color=purple&style=for-the-badge)
-![Closed Issues](https://img.shields.io/github/issues-closed-raw/Pochetes/portfolio-api?color=brown&style=for-the-badge)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+![Code Size](https://img.shields.io/github/languages/code-size/Pochetes/portfolio-api?style=flat-square)
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Frobertos-api.herokuapp.com%2Fdocs)
+![Open Issues](https://img.shields.io/github/issues-raw/Pochetes/portfolio-api?color=purple&style=flat-square)
+![Closed Issues](https://img.shields.io/github/issues-closed-raw/Pochetes/portfolio-api?color=brown&style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/pochetes/portfolio-api?style=flat-square)
 
 The Roberto's Portfolio API is meant to retrieve data about my college life, career experiences and more. The goal of this API is to provide a data source for my GraphQL backend to display information for my portfolio website.
 
