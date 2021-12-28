@@ -19,4 +19,7 @@ RUN set -ex && pipenv install --system --deploy
 # copying rest of application onto container
 COPY ./ ${API_DIR}/
 
-ENTRYPOINT ["/bin/bash", "script.sh"]
+RUN useradd -m rob
+USER rob
+
+CMD [ "/bin/bash", "script.sh" ]
