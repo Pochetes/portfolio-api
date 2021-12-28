@@ -1,11 +1,11 @@
 # Roberto's Portfolio API
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-![Code Size](https://img.shields.io/github/languages/code-size/Pochetes/portfolio-api?style=flat-square)
-![Website](https://img.shields.io/website?down_color=red&down_message=offline&style=flat-square&up_color=green&up_message=online&url=https%3A%2F%2Frobertos-api.herokuapp.com%2Fdocs)
-![Open Issues](https://img.shields.io/github/issues-raw/Pochetes/portfolio-api?color=purple&style=flat-square)
-![Closed Issues](https://img.shields.io/github/issues-closed-raw/Pochetes/portfolio-api?color=brown&style=flat-square)
-![Lines of code](https://img.shields.io/tokei/lines/github/pochetes/portfolio-api?style=flat-square)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE)
+![Code Size](https://img.shields.io/github/languages/code-size/Pochetes/portfolio-api?style=for-the-badge)
+![Website](https://img.shields.io/website?down_color=red&down_message=offline&style=for-the-badge&up_color=green&up_message=online&url=https%3A%2F%2Frobertos-api.herokuapp.com%2Fdocs)
+![Open Issues](https://img.shields.io/github/issues-raw/Pochetes/portfolio-api?color=purple&style=for-the-badge)
+![Closed Issues](https://img.shields.io/github/issues-closed-raw/Pochetes/portfolio-api?color=brown&style=for-the-badge)
+![Lines of code](https://img.shields.io/tokei/lines/github/pochetes/portfolio-api?style=for-the-badge)
 
 The Roberto's Portfolio API is meant to retrieve data about my college life, career experiences and more. The goal of this API is to provide a data source for my GraphQL backend to display information for my portfolio website.
 
@@ -178,19 +178,19 @@ To see the docs, go to [docs](https://robertos-api.herokuapp.com) when it's depl
 
 The `GET` method allows you to access all the data from a specific resource. It is done, like so:
 
-![GET method](media/GETmethod.gif)
+![GET method](media/gifs/GETmethod.gif)
 
 ### Using a `POST` method
 
 The `POST` method allows you to create a new data entry for a specific resource. There will be a Request body in which you will fill out all contents needed, like so:
 
-![POST method](media/POSTmethod.gif)
+![POST method](media/gifs/POSTmethod.gif)
 
 ### Using a method that has a path parameter
 
 A method that has a path parameter usually requires some sort of input to find, update, delete a specific resource. In this example, we are finding a single project by an `id` path parameter. To do this, copy the parameter from the first `GET` method and use it as the current path parameter, like so:
 
-![Params](media/Params.gif)
+![Params](media/gifs/Params.gif)
 
 ## Authentication
 
