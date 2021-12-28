@@ -6,7 +6,7 @@ from pydantic import BaseSettings
 # CHANGE
 class ServerSettings(BaseSettings):
     HOST: str = "0.0.0.0"
-    PORT: int = 8080
+    PORT: int = 8000
     LOG_LEVEL: str = "info"
 
     class Config:
