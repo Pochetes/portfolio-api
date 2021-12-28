@@ -17,6 +17,7 @@ class ServerSettings(BaseSettings):
 class DatabaseSettings(BaseSettings):
     DB_NAME: str = "portfolio"
     DB_URI: str = "MONGODB_URI"
+    PORT: int = 27017
 
     class Config:
         orm_mode = True

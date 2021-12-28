@@ -5,7 +5,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import RedirectResponse
+from fastapi.responses import RedirectResponse, FileResponse
 from pymongo import MongoClient
 
 from config import settings
@@ -53,7 +53,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 def startupDBClient():
-    app.client = MongoClient(MONGODB_URI)
+    app.client = MongoClient(MONGODB_URI, db.PORT)
     app.db = app.client[db.DB_NAME]
 
 
@@ -63,9 +63,15 @@ def shutdownDBClient():
 
 
 # redirects root URL to docs
-@app.get("/", include_in_schema=False)
+@app.get('/', include_in_schema=False)
 def root():
     return RedirectResponse("/docs")
+
+
+# sets the website icon
+@app.get('/', include_in_schema=False)
+def favicon():
+    return FileResponse("media/images/favicon.png")
 
 
 app.include_router(userRouter, tags=["user"])
