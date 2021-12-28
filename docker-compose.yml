@@ -1,6 +1,42 @@
 version: '3.9'
 services:
   web:
+    container_name: portfolio-api-container
     build: .
+    command: /bin/bash script.sh
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_CONNSTRING=${MONGODB_URI}
+    volumes:
+      - .:/api/
+    networks:
+      - portfolio-api-network
     ports:
       - 8080:8080
+  
+  mongo:
+    container_name: mongodb-container
+    image: mongo:4.0.1
+    restart: always
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=${MONGOUSER}
+      - MONGODB_INITDB_ROOT_PASSWORD=${MONGOPASS}
+    env_file:
+      - .env
+    volumes:
+      - mongodata:/data/db
+    networks:
+      - portfolio-api-network
+    ports:
+      - 27017:27017
+
+networks:
+  portfolio-api-network:
+    external: true
+
+volumes:
+  mongodata:
+  
