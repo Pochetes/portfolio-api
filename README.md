@@ -18,85 +18,91 @@ The api returns JSON responses in the `applications/json` format. It has a total
 .
 ├── Dockerfile
 ├── LICENSE
+├── Pipfile
+├── Pipfile.lock
+├── Procfile
 ├── README.md
 ├── __pycache__
-│   ├── config.cpython-39.pyc
-│   ├── database.cpython-39.pyc
-│   ├── main.cpython-39.pyc
-│   ├── models.cpython-39.pyc
-│   └── setup.cpython-39.pyc
+│   ├── config.cpython-39.pyc
+│   ├── database.cpython-39.pyc
+│   ├── main.cpython-39.pyc
+│   ├── models.cpython-39.pyc
+│   └── setup.cpython-39.pyc
 ├── api-tests.json
 ├── config.py
+├── docker-compose.yml
 ├── endpoints
-│   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-39.pyc
-│   │   ├── auth.cpython-39.pyc
-│   │   └── utils.cpython-39.pyc
-│   ├── auth.py
-│   ├── contacts
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── experiences
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── interests
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── projects
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── skills
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   ├── user
-│   │   ├── README.md
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
-│   │   ├── models.py
-│   │   └── routers.py
-│   └── utils.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-39.pyc
+│   │   ├── auth.cpython-39.pyc
+│   │   └── utils.cpython-39.pyc
+│   ├── auth.py
+│   ├── contacts
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── experiences
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── interests
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── projects
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── skills
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   ├── user
+│   │   ├── README.md
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── models.cpython-39.pyc
+│   │   │   └── routers.cpython-39.pyc
+│   │   ├── models.py
+│   │   └── routers.py
+│   └── utils.py
 ├── main.py
 ├── media
-│   ├── GETmethod.gif
-│   ├── POSTmethod.gif
-│   └── Params.gif
-└── requirements.txt
+│   └── gifs
+│       ├── GETmethod.gif
+│       ├── POSTmethod.gif
+│       └── Params.gif
+├── requirements.txt
+└── script.sh
 
-16 directories, 63 files
+17 directories, 68 files
 ```
 
 ### Technologies Used
@@ -119,11 +125,11 @@ This API provides many features that make it lighting-fast:
 - Pylint & API Testing
 - Auth0 Authentication & Security
 - Built under Docker environment OS
-- Deployed On Heroku **(SOON!)**
+- Deployed On Heroku
 
 ## Endpoints
 
-The base URL is currently: `http://localhost:8000/` --> (**SOON** `https://pochetes-dev.heroku-app.com`)
+The base URL is currently: `https://robertos-api.herokuapp.com`
 
 ### User 👨🏼
 
@@ -164,7 +170,9 @@ See a detailed description at: [Projects Docs](endpoints/projects/README.md)
 
 Thanks to FastAPI, a documentation page is automatically rendered for us. This follows the OpenAPI Spec rules.
 
-To see the docs, go to [docs](http://localhost:8000/docs) when it's deployed.
+To see the docs, go to [docs](https://robertos-api.herokuapp.com) when it's deployed.
+
+***Update**: The `/docs` endpoint will automatically be accessed when using the base url.
 
 ### Using a `GET` method
 
