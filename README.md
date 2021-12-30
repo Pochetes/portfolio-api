@@ -230,6 +230,7 @@ export MONGODB_URI = "mongodb+srv://Username:Password@mongodb-cluster-name.foihs
 For more details, visit [connect to a MongoDB database](https://docs.atlas.mongodb.com/).
 
 ### Creating a virtual environment
+My application currently uses Pipenv to manage dependencies and environments, but you can also use pip + virtualenv.
 
 To create a virtual environment, create a hidden `virtualenv` file, like so:
 ```
