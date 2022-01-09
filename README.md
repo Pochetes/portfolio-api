@@ -22,74 +22,40 @@ The api returns JSON responses in the `applications/json` format. It has a total
 ├── Pipfile.lock
 ├── Procfile
 ├── README.md
-├── __pycache__
-│   ├── config.cpython-39.pyc
-│   ├── database.cpython-39.pyc
-│   ├── main.cpython-39.pyc
-│   ├── models.cpython-39.pyc
-│   └── setup.cpython-39.pyc
 ├── api-tests.json
 ├── config.py
 ├── docker-compose.yml
 ├── endpoints
 │   ├── __init__.py
-│   ├── __pycache__
-│   │   ├── __init__.cpython-39.pyc
-│   │   ├── auth.cpython-39.pyc
-│   │   └── utils.cpython-39.pyc
 │   ├── auth.py
 │   ├── contacts
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   ├── experiences
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   ├── interests
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   ├── projects
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   ├── skills
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   ├── user
 │   │   ├── README.md
 │   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-39.pyc
-│   │   │   ├── models.cpython-39.pyc
-│   │   │   └── routers.cpython-39.pyc
 │   │   ├── models.py
 │   │   └── routers.py
 │   └── utils.py
@@ -102,7 +68,7 @@ The api returns JSON responses in the `applications/json` format. It has a total
 ├── requirements.txt
 └── script.sh
 
-17 directories, 68 files
+10 directories, 47 files
 ```
 
 ### Technologies Used
